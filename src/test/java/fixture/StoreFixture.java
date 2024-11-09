@@ -4,12 +4,12 @@ import store.infra.file.FileDataInitializer;
 import store.infra.file.FileLoader;
 import store.repository.InMemoryProductRepository;
 import store.repository.InMemoryPromotionRepository;
-import store.infra.file.StoreFileConverter;
+import store.common.StoreMapper;
 
 public class StoreFixture {
 
     public static FileDataInitializer fileDataInitializer() {
-        return new FileDataInitializer(new FileLoader(), new StoreFileConverter(), productRepository(),
+        return new FileDataInitializer(new FileLoader(), new StoreMapper(), productRepository(),
                 promotionRepository());
     }
 

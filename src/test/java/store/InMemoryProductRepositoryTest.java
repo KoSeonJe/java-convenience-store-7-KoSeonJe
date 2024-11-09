@@ -24,8 +24,11 @@ class InMemoryProductRepositoryTest {
     @Test
     void saveAllIfAbsent() {
         //given
-        String[] rawProduct = {"콜라", "1000", "10", "탄산2+1"};
-        List<Product> products = List.of(Product.create(rawProduct));
+        String name = "콜라";
+        BigDecimal price = BigDecimal.valueOf(1000);
+        int quantity = 10;
+        String promotionName = "탄산2+1";
+        List<Product> products = List.of(Product.create(name, price, quantity, promotionName));
 
         //when
         repository.saveAll(products);
@@ -44,11 +47,13 @@ class InMemoryProductRepositoryTest {
     @Test
     void saveAllIfExist() {
         //given
-        String[] rawProduct1 = {"콜라", "1000", "10", "탄산2+1"};
-        List<Product> products = List.of(Product.create(rawProduct1));
+        String name = "콜라";
+        BigDecimal price = BigDecimal.valueOf(1000);
+        int quantity = 10;
+        String promotionName = "탄산2+1";
+        List<Product> products = List.of(Product.create(name, price, quantity, promotionName));
         repository.saveAll(products);
-        String[] rawProduct2 = {"콜라", "1000", "10", "null"};
-        List<Product> products2 = List.of(Product.create(rawProduct2));
+        List<Product> products2 = List.of(Product.create(name, price, quantity, null));
 
         //when
         repository.saveAll(products2);
@@ -60,6 +65,6 @@ class InMemoryProductRepositoryTest {
         assertThat(findProduct.get(1).getName()).isEqualTo("콜라");
         assertThat(findProduct.get(1).getPrice()).isEqualTo(new BigDecimal(1000));
         assertThat(findProduct.get(1).getQuantity()).isEqualTo(10);
-        assertThat(findProduct.get(1).getPromotionName()).isEqualTo("null");
+        assertThat(findProduct.get(1).getPromotionName()).isNull();
     }
 }

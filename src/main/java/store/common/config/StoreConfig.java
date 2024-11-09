@@ -7,7 +7,7 @@ import store.repository.InMemoryProductRepository;
 import store.repository.InMemoryPromotionRepository;
 import store.repository.ProductRepository;
 import store.repository.PromotionRepository;
-import store.infra.file.StoreFileConverter;
+import store.common.StoreMapper;
 
 public final class StoreConfig {
 
@@ -22,7 +22,7 @@ public final class StoreConfig {
     }
 
     public DataInitializer dataInitializer() {
-        return new FileDataInitializer(new FileLoader(), new StoreFileConverter(), productRepository(), promotionRepository());
+        return new FileDataInitializer(new FileLoader(), new StoreMapper(), productRepository(), promotionRepository());
     }
 
     private ProductRepository productRepository() {

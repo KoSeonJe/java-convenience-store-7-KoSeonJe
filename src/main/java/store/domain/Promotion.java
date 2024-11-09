@@ -1,11 +1,5 @@
 package store.domain;
 
-import static store.common.constant.StoreConstant.PROMOTION_BUY_INDEX;
-import static store.common.constant.StoreConstant.PROMOTION_END_DATE_INDEX;
-import static store.common.constant.StoreConstant.PROMOTION_GET_INDEX;
-import static store.common.constant.StoreConstant.PROMOTION_NAME_INDEX;
-import static store.common.constant.StoreConstant.PROMOTION_START_DATE_INDEX;
-
 import java.time.LocalDate;
 
 
@@ -21,7 +15,7 @@ public class Promotion {
 
     private LocalDate endDate;
 
-    public Promotion(String name, int buy, int get, LocalDate startDate, LocalDate endDate) {
+    private Promotion(String name, int buy, int get, LocalDate startDate, LocalDate endDate) {
         this.name = name;
         this.buy = buy;
         this.get = get;
@@ -49,13 +43,7 @@ public class Promotion {
         return endDate;
     }
 
-    public static Promotion create(String[] rawFields) {
-        return new Promotion(
-                rawFields[PROMOTION_NAME_INDEX],
-                Integer.parseInt(rawFields[PROMOTION_BUY_INDEX]),
-                Integer.parseInt(rawFields[PROMOTION_GET_INDEX]),
-                LocalDate.parse(rawFields[PROMOTION_START_DATE_INDEX]),
-                LocalDate.parse(rawFields[PROMOTION_END_DATE_INDEX])
-        );
+    public static Promotion create(String name, int buy, int get, LocalDate startDate, LocalDate endDate) {
+        return new Promotion(name, buy, get, startDate, endDate);
     }
 }
