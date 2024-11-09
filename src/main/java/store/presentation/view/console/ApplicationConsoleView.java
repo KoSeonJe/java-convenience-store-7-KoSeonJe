@@ -25,4 +25,9 @@ public class ApplicationConsoleView implements ApplicationView {
     public String inputPurchaseItem() {
         return inputView.requireInputItem();
     }
+
+    @Override
+    public String confirmAdditionalItem(String name) {
+        return inputView.confirmAdditionalItem(name);
+    }
 }
