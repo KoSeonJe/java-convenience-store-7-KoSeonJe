@@ -13,6 +13,14 @@ public final class StoreConfig {
     }
 
     public DataInitializer dataInitializer() {
-        return new FileDataInitializer(new FileLoader());
+        return new FileDataInitializer(new FileLoader(), new ObjectMapper(), productRepository(), promotionRepository());
+    }
+
+    private ProductRepository productRepository() {
+        return InMemoryProductRepository.getInstance();
+    }
+
+    private PromotionRepository promotionRepository() {
+        return InMemoryPromotionRepository.getInstance();
     }
 }
