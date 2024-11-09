@@ -6,11 +6,11 @@ import store.domain.Product;
 import store.domain.ProductGroup;
 import store.repository.ProductRepository;
 
-public class ConvenienceStoreFinder {
+public class ProductFinder {
 
     private final ProductRepository productRepository;
 
-    public ConvenienceStoreFinder(ProductRepository productRepository) {
+    public ProductFinder(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

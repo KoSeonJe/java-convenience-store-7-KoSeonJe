@@ -2,9 +2,9 @@ package store.common.config;
 
 import store.ConvenicenceStore;
 import store.Store;
-import store.application.StoreService;
-import store.application.service.ConvenienceStoreFinder;
-import store.application.service.ConvenienceStoreService;
+import store.application.ProductService;
+import store.application.service.ProductFinder;
+import store.application.service.ConvenienceProductService;
 import store.common.support.StoreMapper;
 import store.infra.file.DataInitializer;
 import store.infra.file.FileDataInitializer;
@@ -60,11 +60,11 @@ public final class StoreConfig {
         return InMemoryPromotionRepository.getInstance();
     }
 
-    private StoreService storeService() {
-        return new ConvenienceStoreService(convenienceStoreFinder());
+    private ProductService storeService() {
+        return new ConvenienceProductService(productFinder());
     }
 
-    private ConvenienceStoreFinder convenienceStoreFinder() {
-        return new ConvenienceStoreFinder(productRepository());
+    private ProductFinder productFinder() {
+        return new ProductFinder(productRepository());
     }
 }

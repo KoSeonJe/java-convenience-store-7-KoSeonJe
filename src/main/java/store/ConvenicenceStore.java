@@ -1,16 +1,16 @@
 package store;
 
-import store.application.StoreService;
+import store.application.ProductService;
 import store.view.ApplicationView;
 
 public class ConvenicenceStore implements Store {
 
     private final ApplicationView applicationView;
-    private final StoreService storeService;
+    private final ProductService productService;
 
-    public ConvenicenceStore(ApplicationView applicationView, StoreService storeService) {
+    public ConvenicenceStore(ApplicationView applicationView, ProductService productService) {
         this.applicationView = applicationView;
-        this.storeService = storeService;
+        this.productService = productService;
     }
 
     @Override
@@ -19,6 +19,6 @@ public class ConvenicenceStore implements Store {
     }
 
     private void requirePurchaseItem() {
-        applicationView.showIntroduction(storeService.getAllProduct());
+        applicationView.showIntroduction(productService.getAllProduct());
     }
 }
