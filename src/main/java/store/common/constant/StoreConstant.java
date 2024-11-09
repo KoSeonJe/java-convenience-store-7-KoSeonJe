@@ -16,4 +16,7 @@ public final class StoreConstant {
     public static final int PROMOTION_GET_INDEX = 2;
     public static final int PROMOTION_START_DATE_INDEX = 3;
     public static final int PROMOTION_END_DATE_INDEX = 4;
+
+    public static final int REQUEST_ITEM_NAME_INDEX = 0;
+    public static final int REQUEST_ITEM_QUANTITY_INDEX = 1;
 }

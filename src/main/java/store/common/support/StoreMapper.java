@@ -9,6 +9,8 @@ import static store.common.constant.StoreConstant.PROMOTION_END_DATE_INDEX;
 import static store.common.constant.StoreConstant.PROMOTION_GET_INDEX;
 import static store.common.constant.StoreConstant.PROMOTION_NAME_INDEX;
 import static store.common.constant.StoreConstant.PROMOTION_START_DATE_INDEX;
+import static store.common.constant.StoreConstant.REQUEST_ITEM_NAME_INDEX;
+import static store.common.constant.StoreConstant.REQUEST_ITEM_QUANTITY_INDEX;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,16 +18,18 @@ import java.util.ArrayList;
 import java.util.List;
 import store.domain.Product;
 import store.domain.Promotion;
+import store.presentation.dto.RequestItem;
 
 public class StoreMapper {
 
-    private static final String FIELD_SEPARATOR = ",";
+    private static final String DATA_SEPARATOR = ",";
     private static final String NULL_MESSAGE = "null";
+    private static final String NAME_QUANTITY_SEPARATOR = "-";
 
     public List<Product> toProducts(List<String> rawProducts) {
         List<Product> products = new ArrayList<>();
         rawProducts.forEach(rawProduct -> {
-            List<String> fields = List.of(rawProduct.split(FIELD_SEPARATOR));
+            List<String> fields = List.of(rawProduct.split(DATA_SEPARATOR));
             Product product = creatProduct(fields);
             products.add(product);
         });
@@ -35,12 +39,19 @@ public class StoreMapper {
     public List<Promotion> toPromotions(List<String> rawPromotions) {
         List<Promotion> promotions = new ArrayList<>();
         rawPromotions.forEach(rawPromotion -> {
-            List<String> fields = List.of(rawPromotion.split(FIELD_SEPARATOR));
+            List<String> fields = List.of(rawPromotion.split(DATA_SEPARATOR));
             Promotion promotion = createPromotions(fields);
             promotions.add(promotion);
         });
         return promotions;
 
+    }
+
+    public List<RequestItem> toRequestItem(String rawRequestItems) {
+        List<String> splitItems = List.of(rawRequestItems.split(DATA_SEPARATOR));
+        return splitItems.stream()
+                .map(this::createRequestItem)
+                .toList();
     }
 
     private Product creatProduct(List<String> fields) {
@@ -61,5 +72,13 @@ public class StoreMapper {
         LocalDate startDate = LocalDate.parse(fields.get(PROMOTION_START_DATE_INDEX));
         LocalDate endDate = LocalDate.parse(fields.get(PROMOTION_END_DATE_INDEX));
         return Promotion.create(name, buy, get, startDate, endDate);
+    }
+
+    private RequestItem createRequestItem(String splitItem) {
+        String content = splitItem.substring(1, splitItem.length() - 1);
+        String[] itemInfo = content.split(NAME_QUANTITY_SEPARATOR);
+        String name = itemInfo[REQUEST_ITEM_NAME_INDEX];
+        int quantity = Integer.parseInt(itemInfo[REQUEST_ITEM_QUANTITY_INDEX]);
+        return new RequestItem(name, quantity);
     }
 }
