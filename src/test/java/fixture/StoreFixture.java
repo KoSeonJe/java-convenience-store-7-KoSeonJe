@@ -4,7 +4,7 @@ import store.infra.file.FileDataInitializer;
 import store.infra.file.FileLoader;
 import store.repository.InMemoryProductRepository;
 import store.repository.InMemoryPromotionRepository;
-import store.common.StoreMapper;
+import store.common.support.StoreMapper;
 
 public class StoreFixture {
 

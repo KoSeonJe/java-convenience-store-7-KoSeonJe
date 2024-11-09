@@ -1,4 +1,4 @@
-package store.common;
+package store.common.support;
 
 import static store.common.constant.StoreConstant.PRODUCT_NAME_INDEX;
 import static store.common.constant.StoreConstant.PRODUCT_PRICE_INDEX;
