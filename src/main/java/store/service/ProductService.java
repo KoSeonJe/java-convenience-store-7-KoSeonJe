@@ -1,4 +1,4 @@
-package store.application;
+package store.service;
 
 import java.util.List;
 import store.domain.Product;

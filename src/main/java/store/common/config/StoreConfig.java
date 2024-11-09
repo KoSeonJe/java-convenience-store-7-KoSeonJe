@@ -1,10 +1,10 @@
 package store.common.config;
 
-import store.ConvenicenceStore;
-import store.Store;
-import store.application.ProductService;
-import store.application.service.ProductFinder;
-import store.application.service.ConvenienceProductService;
+import store.presentation.controller.ConvenicenceStore;
+import store.presentation.controller.Store;
+import store.service.ProductService;
+import store.service.implement.ProductFinder;
+import store.service.ConvenienceProductService;
 import store.common.support.StoreMapper;
 import store.infra.file.DataInitializer;
 import store.infra.file.FileDataInitializer;
@@ -13,12 +13,12 @@ import store.repository.InMemoryProductRepository;
 import store.repository.InMemoryPromotionRepository;
 import store.repository.ProductRepository;
 import store.repository.PromotionRepository;
-import store.view.ApplicationConsoleView;
-import store.view.ApplicationView;
-import store.view.InputConsoleView;
-import store.view.InputView;
-import store.view.OutputConsoleView;
-import store.view.OutputView;
+import store.presentation.view.console.ApplicationConsoleView;
+import store.presentation.view.ApplicationView;
+import store.presentation.view.console.InputConsoleView;
+import store.presentation.view.InputView;
+import store.presentation.view.console.OutputConsoleView;
+import store.presentation.view.OutputView;
 
 public final class StoreConfig {
 

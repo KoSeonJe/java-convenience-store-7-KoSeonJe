@@ -1,8 +1,9 @@
-package store.view;
+package store.presentation.view.console;
 
 import java.text.DecimalFormat;
-import java.util.List;
-import store.domain.Product;
+import store.presentation.dto.GetAllProductResponse;
+import store.presentation.dto.ProductInfo;
+import store.presentation.view.OutputView;
 
 public class OutputConsoleView implements OutputView {
 
@@ -22,15 +23,15 @@ public class OutputConsoleView implements OutputView {
     }
 
     @Override
-    public void printInventory(List<Product> products) {
+    public void printInventory(GetAllProductResponse getAllProductResponse) {
         println(INTRODUCE_INVENTORY_MESSAGE + LINE_SEPARATOR);
         StringBuilder builder = new StringBuilder();
-        for (Product product : products) {
+        for (ProductInfo productInfo : getAllProductResponse.productInfos()) {
             builder.append(ITEM_PREFIX)
-                    .append(BLANK).append(product.getName())
-                    .append(BLANK).append(FOMMATER.format(product.getPrice())).append(PRICE_UNIT);
-            appendQuantity(builder, product.getQuantity());
-            appendPromotionName(builder, product.getPromotionName());
+                    .append(BLANK).append(productInfo.name())
+                    .append(BLANK).append(FOMMATER.format(productInfo.price())).append(PRICE_UNIT);
+            appendQuantity(builder, productInfo.quantity());
+            appendPromotionName(builder, productInfo.promotionName());
         }
         println(builder.toString());
     }

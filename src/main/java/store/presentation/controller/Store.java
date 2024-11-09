@@ -1,4 +1,4 @@
-package store;
+package store.presentation.controller;
 
 public interface Store {
 

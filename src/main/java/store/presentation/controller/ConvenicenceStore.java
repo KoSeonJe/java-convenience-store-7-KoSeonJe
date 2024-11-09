@@ -1,7 +1,11 @@
-package store;
+package store.presentation.controller;
 
-import store.application.ProductService;
-import store.view.ApplicationView;
+import java.util.List;
+import store.common.support.StoreMapper;
+import store.domain.Product;
+import store.presentation.dto.GetAllProductResponse;
+import store.presentation.view.ApplicationView;
+import store.service.ProductService;
 
 public class ConvenicenceStore implements Store {
 

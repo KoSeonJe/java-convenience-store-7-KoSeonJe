@@ -1,7 +1,7 @@
-package store.application.service;
+package store.service;
 
 import java.util.List;
-import store.application.ProductService;
+import store.service.implement.ProductFinder;
 import store.domain.Product;
 
 public class ConvenienceProductService implements ProductService {

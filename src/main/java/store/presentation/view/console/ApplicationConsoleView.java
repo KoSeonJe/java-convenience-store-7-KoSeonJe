@@ -1,7 +1,9 @@
-package store.view;
+package store.presentation.view.console;
 
-import java.util.List;
-import store.domain.Product;
+import store.presentation.dto.GetAllProductResponse;
+import store.presentation.view.ApplicationView;
+import store.presentation.view.InputView;
+import store.presentation.view.OutputView;
 
 public class ApplicationConsoleView implements ApplicationView {
 
@@ -14,9 +16,9 @@ public class ApplicationConsoleView implements ApplicationView {
     }
 
     @Override
-    public void introduceItem(List<Product> products) {
+    public void introduceItem(GetAllProductResponse response) {
         outputView.printWelcomeMessage();
-        outputView.printInventory(products);
+        outputView.printInventory(response);
     }
 
     @Override

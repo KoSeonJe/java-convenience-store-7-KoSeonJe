@@ -1,6 +1,7 @@
-package store.view;
+package store.presentation.view.console;
 
 import camp.nextstep.edu.missionutils.Console;
+import store.presentation.view.InputView;
 
 public class InputConsoleView implements InputView {
 
