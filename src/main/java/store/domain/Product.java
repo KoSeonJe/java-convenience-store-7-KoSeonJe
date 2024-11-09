@@ -1,9 +1,9 @@
-package store;
+package store.domain;
 
-import static store.StoreConstant.PRODUCT_NAME_INDEX;
-import static store.StoreConstant.PRODUCT_PRICE_INDEX;
-import static store.StoreConstant.PRODUCT_PROMOTION_NAME_INDEX;
-import static store.StoreConstant.PRODUCT_QUANTITY_INDEX;
+import static store.common.constant.StoreConstant.PRODUCT_NAME_INDEX;
+import static store.common.constant.StoreConstant.PRODUCT_PRICE_INDEX;
+import static store.common.constant.StoreConstant.PRODUCT_PROMOTION_NAME_INDEX;
+import static store.common.constant.StoreConstant.PRODUCT_QUANTITY_INDEX;
 
 import java.math.BigDecimal;
 

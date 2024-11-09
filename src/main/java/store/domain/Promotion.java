@@ -1,10 +1,10 @@
-package store;
+package store.domain;
 
-import static store.StoreConstant.PROMOTION_BUY_INDEX;
-import static store.StoreConstant.PROMOTION_END_DATE_INDEX;
-import static store.StoreConstant.PROMOTION_GET_INDEX;
-import static store.StoreConstant.PROMOTION_NAME_INDEX;
-import static store.StoreConstant.PROMOTION_START_DATE_INDEX;
+import static store.common.constant.StoreConstant.PROMOTION_BUY_INDEX;
+import static store.common.constant.StoreConstant.PROMOTION_END_DATE_INDEX;
+import static store.common.constant.StoreConstant.PROMOTION_GET_INDEX;
+import static store.common.constant.StoreConstant.PROMOTION_NAME_INDEX;
+import static store.common.constant.StoreConstant.PROMOTION_START_DATE_INDEX;
 
 import java.time.LocalDate;
 

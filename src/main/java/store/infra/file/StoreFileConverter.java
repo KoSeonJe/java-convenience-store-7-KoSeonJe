@@ -1,9 +1,11 @@
-package store;
+package store.infra.file;
 
 import java.util.ArrayList;
 import java.util.List;
+import store.domain.Product;
+import store.domain.Promotion;
 
-public class ObjectMapper {
+public class StoreFileConverter {
 
     private static final String FIELD_SEPARATOR = ",";
 

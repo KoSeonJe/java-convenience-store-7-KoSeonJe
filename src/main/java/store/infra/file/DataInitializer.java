@@ -1,4 +1,4 @@
-package store;
+package store.infra.file;
 
 public interface DataInitializer {
 

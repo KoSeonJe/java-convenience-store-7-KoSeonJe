@@ -1,9 +1,10 @@
-package store;
+package store.repository;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import store.domain.Promotion;
 
 public class InMemoryPromotionRepository implements PromotionRepository {
 

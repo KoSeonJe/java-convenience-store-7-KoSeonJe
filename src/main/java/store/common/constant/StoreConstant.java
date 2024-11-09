@@ -1,4 +1,4 @@
-package store;
+package store.common.constant;
 
 public final class StoreConstant {
 

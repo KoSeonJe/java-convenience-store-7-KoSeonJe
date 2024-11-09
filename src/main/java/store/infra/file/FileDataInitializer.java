@@ -1,6 +1,8 @@
-package store;
+package store.infra.file;
 
 import java.util.List;
+import store.repository.ProductRepository;
+import store.repository.PromotionRepository;
 
 public class FileDataInitializer implements DataInitializer {
 
@@ -8,15 +10,15 @@ public class FileDataInitializer implements DataInitializer {
     private static final String PROMOTIONS_FILE_NAME = "promotions.md";
 
     private final FileLoader fileloader;
-    private final ObjectMapper objectMapper;
+    private final StoreFileConverter storeFileConverter;
     private final ProductRepository productRepository;
     private final PromotionRepository promotionRepository;
 
 
-    public FileDataInitializer(FileLoader fileloader, ObjectMapper objectMapper, ProductRepository productRepository,
+    public FileDataInitializer(FileLoader fileloader, StoreFileConverter storeFileConverter, ProductRepository productRepository,
             PromotionRepository promotionRepository) {
         this.fileloader = fileloader;
-        this.objectMapper = objectMapper;
+        this.storeFileConverter = storeFileConverter;
         this.productRepository = productRepository;
         this.promotionRepository = promotionRepository;
     }
@@ -25,7 +27,7 @@ public class FileDataInitializer implements DataInitializer {
     public void init() {
         List<String> rawProducts = fileloader.loadFile(PRODUCTS_FILE_NAME);
         List<String> rawPromotions = fileloader.loadFile(PROMOTIONS_FILE_NAME);
-        productRepository.saveAll(objectMapper.toProducts(rawProducts));
-        promotionRepository.saveAll(objectMapper.toPromotions(rawPromotions));
+        productRepository.saveAll(storeFileConverter.toProducts(rawProducts));
+        promotionRepository.saveAll(storeFileConverter.toPromotions(rawPromotions));
     }
 }

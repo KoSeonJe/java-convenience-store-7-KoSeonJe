@@ -1,15 +1,15 @@
 package fixture;
 
-import store.FileDataInitializer;
-import store.FileLoader;
-import store.InMemoryProductRepository;
-import store.InMemoryPromotionRepository;
-import store.ObjectMapper;
+import store.infra.file.FileDataInitializer;
+import store.infra.file.FileLoader;
+import store.repository.InMemoryProductRepository;
+import store.repository.InMemoryPromotionRepository;
+import store.infra.file.StoreFileConverter;
 
 public class StoreFixture {
 
     public static FileDataInitializer fileDataInitializer() {
-        return new FileDataInitializer(new FileLoader(), new ObjectMapper(), productRepository(),
+        return new FileDataInitializer(new FileLoader(), new StoreFileConverter(), productRepository(),
                 promotionRepository());
     }
 

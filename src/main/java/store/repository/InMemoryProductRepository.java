@@ -1,9 +1,10 @@
-package store;
+package store.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import store.domain.Product;
 
 public class InMemoryProductRepository implements ProductRepository {
 

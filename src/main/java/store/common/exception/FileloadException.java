@@ -1,4 +1,4 @@
-package store;
+package store.common.exception;
 
 public class FileloadException extends RuntimeException {
 
