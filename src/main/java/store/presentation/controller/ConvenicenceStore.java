@@ -23,7 +23,8 @@ public class ConvenicenceStore implements Store {
     }
 
     private void requirePurchaseItem() {
-        applicationView.introduceItem(productService.getAllProduct());
+        List<Product> products = productService.getAllProduct();
+        applicationView.introduceItem(GetAllProductResponse.from(products));
         String inputtedItems = applicationView.inputPurchaseItem();
     }
 }
