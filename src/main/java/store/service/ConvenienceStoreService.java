@@ -7,7 +7,7 @@ import store.common.util.NumberUtils;
 import store.domain.Product;
 import store.domain.ProductGroup;
 import store.domain.Promotion;
-import store.presentation.dto.RequestItem;
+import store.domain.PurchaseInfo;
 import store.service.implement.ProductFinder;
 import store.service.implement.PromotionFinder;
 
@@ -30,18 +30,18 @@ public class ConvenienceStoreService implements StoreService {
     }
 
     @Override
-    public boolean checkAddPromotionQuantity(Promotion promotion, RequestItem requestItem) {
-        return promotionChecker.shouldAddProduct(promotion, requestItem.getQuantity());
+    public boolean checkAddPromotionQuantity(Promotion promotion, PurchaseInfo purchaseInfo) {
+        ProductGroup productGroup = productFinder.findAllByName(purchaseInfo.getName());
+        Product promotionProduct = productGroup.findpromotionProduct();
+        if (promotionProduct.getQuantity() == purchaseInfo.getOriginQuantity()) {
+            return false;
+        }
+        return promotionChecker.shouldAddProduct(promotion, purchaseInfo.getOriginQuantity());
     }
 
     @Override
-    public boolean checkOverPromotionQuantity(Promotion promotion, RequestItem requestItem) {
-        return false;
-    }
-
-    @Override
-    public Promotion findPromotion(RequestItem requestItem) {
-        ProductGroup productGroup = productFinder.findAllByName(requestItem.getName());
+    public Promotion findPromotion(PurchaseInfo purchaseInfo) {
+        ProductGroup productGroup = productFinder.findAllByName(purchaseInfo.getName());
         Product promotionProduct = productGroup.findpromotionProduct();
         if(promotionProduct == null) {
             return null;
@@ -50,16 +50,16 @@ public class ConvenienceStoreService implements StoreService {
     }
 
     @Override
-    public int getQuantityDifference(Promotion promotion, RequestItem requestItem) {
-        ProductGroup productGroup = productFinder.findAllByName(requestItem.getName());
+    public int getQuantityDifference(Promotion promotion, PurchaseInfo purchaseInfo) {
+        ProductGroup productGroup = productFinder.findAllByName(purchaseInfo.getName());
         Product promotionProduct = productGroup.findpromotionProduct();
-        int difference = promotionProduct.getQuantity() - requestItem.getQuantity();
+        int difference = promotionProduct.getQuantity() - purchaseInfo.getOriginQuantity();
         if (NumberUtils.isPositive(difference)) {
             return NO_OVER_PROMOTION_QUANTITY;
         }
         //프로모션 상품 /
         int promotionUnit = promotion.getGet() + promotion.getBuy();
         int promotionTarget = promotionProduct.getQuantity() - (promotionProduct.getQuantity() % promotionUnit);
-        return requestItem.getQuantity() - promotionTarget;
+        return purchaseInfo.getOriginQuantity() - promotionTarget;
     }
 }
