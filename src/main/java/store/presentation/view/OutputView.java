@@ -1,10 +1,10 @@
 package store.presentation.view;
 
-import store.presentation.dto.GetAllProductResponse;
+import store.presentation.dto.AllProductInfo;
 
 public interface OutputView {
 
     void printWelcomeMessage();
 
-    void printInventory(GetAllProductResponse response);
+    void printInventory(AllProductInfo response);
 }

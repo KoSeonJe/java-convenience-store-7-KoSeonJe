@@ -1,10 +1,10 @@
 package store.presentation.view;
 
-import store.presentation.dto.GetAllProductResponse;
+import store.presentation.dto.AllProductInfo;
 
 public interface ApplicationView {
 
-    void introduceItem(GetAllProductResponse response);
+    void introduceItem(AllProductInfo response);
 
     String inputPurchaseItem();
 }

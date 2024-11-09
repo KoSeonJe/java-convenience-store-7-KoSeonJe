@@ -1,6 +1,6 @@
 package store.presentation.view.console;
 
-import store.presentation.dto.GetAllProductResponse;
+import store.presentation.dto.AllProductInfo;
 import store.presentation.view.ApplicationView;
 import store.presentation.view.InputView;
 import store.presentation.view.OutputView;
@@ -16,7 +16,7 @@ public class ApplicationConsoleView implements ApplicationView {
     }
 
     @Override
-    public void introduceItem(GetAllProductResponse response) {
+    public void introduceItem(AllProductInfo response) {
         outputView.printWelcomeMessage();
         outputView.printInventory(response);
     }

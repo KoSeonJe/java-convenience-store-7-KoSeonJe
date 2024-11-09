@@ -37,7 +37,7 @@ public final class StoreConfig {
     }
 
     public Store store() {
-        return new ConvenicenceStore(applicationView(), storeService());
+        return new ConvenicenceStore(applicationView(), storeService(), new StoreMapper());
     }
 
     private ApplicationView applicationView() {
