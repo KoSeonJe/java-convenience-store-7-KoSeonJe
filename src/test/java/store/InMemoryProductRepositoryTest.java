@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import store.domain.Product;
+import store.domain.ProductGroup;
 import store.repository.InMemoryProductRepository;
 
 class InMemoryProductRepositoryTest {
@@ -34,13 +35,13 @@ class InMemoryProductRepositoryTest {
         repository.saveAll(products);
 
         //then
-        List<Product> findProduct = repository.findByName("콜라");
+        ProductGroup findProduct = repository.findByName("콜라").orElse(null);
         assertThat(findProduct).isNotNull();
-        assertThat(findProduct).hasSize(1);
-        assertThat(findProduct.getFirst().getName()).isEqualTo("콜라");
-        assertThat(findProduct.getFirst().getPrice()).isEqualTo(new BigDecimal(1000));
-        assertThat(findProduct.getFirst().getQuantity()).isEqualTo(10);
-        assertThat(findProduct.getFirst().getPromotionName()).isEqualTo("탄산2+1");
+        assertThat(findProduct.getProducts()).hasSize(1);
+        assertThat(findProduct.getProducts().get(0).getName()).isEqualTo("콜라");
+        assertThat(findProduct.getProducts().get(0).getPrice()).isEqualTo(new BigDecimal(1000));
+        assertThat(findProduct.getProducts().get(0).getQuantity()).isEqualTo(10);
+        assertThat(findProduct.getProducts().get(0).getPromotionName()).isEqualTo("탄산2+1");
     }
 
     @DisplayName("key의 값이 존재할 경우, 기존 리스트에 값을 추가한다.")
@@ -59,12 +60,12 @@ class InMemoryProductRepositoryTest {
         repository.saveAll(products2);
 
         //then
-        List<Product> findProduct = repository.findByName("콜라");
+        ProductGroup findProduct = repository.findByName("콜라").orElse(null);
         assertThat(findProduct).isNotNull();
-        assertThat(findProduct).hasSize(2);
-        assertThat(findProduct.get(1).getName()).isEqualTo("콜라");
-        assertThat(findProduct.get(1).getPrice()).isEqualTo(new BigDecimal(1000));
-        assertThat(findProduct.get(1).getQuantity()).isEqualTo(10);
-        assertThat(findProduct.get(1).getPromotionName()).isNull();
+        assertThat(findProduct.getProducts()).hasSize(2);
+        assertThat(findProduct.getProducts().get(1).getName()).isEqualTo("콜라");
+        assertThat(findProduct.getProducts().get(1).getPrice()).isEqualTo(new BigDecimal(1000));
+        assertThat(findProduct.getProducts().get(1).getQuantity()).isEqualTo(10);
+        assertThat(findProduct.getProducts().get(1).getPromotionName()).isNull();
     }
 }

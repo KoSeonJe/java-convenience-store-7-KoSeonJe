@@ -1,7 +1,7 @@
 package store.infra.file;
 
 import java.util.List;
-import store.common.StoreMapper;
+import store.common.support.StoreMapper;
 import store.repository.ProductRepository;
 import store.repository.PromotionRepository;
 
