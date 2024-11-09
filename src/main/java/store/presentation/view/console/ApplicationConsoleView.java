@@ -35,4 +35,9 @@ public class ApplicationConsoleView implements ApplicationView {
     public String confirmOriginalPrice(String name, int quantityDifference) {
         return inputView.confirmOriginalPrice(name, quantityDifference);
     }
+
+    @Override
+    public String confirmApplyMembership() {
+        return inputView.confirmApplyMembership();
+    }
 }

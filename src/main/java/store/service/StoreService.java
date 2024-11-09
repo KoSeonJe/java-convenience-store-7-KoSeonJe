@@ -3,17 +3,15 @@ package store.service;
 import java.util.List;
 import store.domain.Product;
 import store.domain.Promotion;
-import store.presentation.dto.RequestItem;
+import store.domain.PurchaseInfo;
 
 public interface StoreService {
 
     List<Product> getAllProduct();
 
-    boolean checkAddPromotionQuantity(Promotion promotion, RequestItem requestItem);
+    boolean checkAddPromotionQuantity(Promotion promotion, PurchaseInfo purchaseInfo);
 
-    boolean checkOverPromotionQuantity(Promotion promotion, RequestItem requestItem);
+    Promotion findPromotion(PurchaseInfo purchaseInfo);
 
-    Promotion findPromotion(RequestItem requestItem);
-
-    int getQuantityDifference(Promotion promotion, RequestItem requestItem);
+    int getQuantityDifference(Promotion promotion, PurchaseInfo purchaseInfo);
 }

@@ -17,6 +17,7 @@ import store.repository.InMemoryPromotionRepository;
 import store.repository.ProductRepository;
 import store.repository.PromotionRepository;
 import store.service.ConvenienceStoreService;
+import store.service.PromotionChecker;
 import store.service.StoreService;
 import store.service.implement.ProductFinder;
 import store.service.implement.PromotionFinder;
@@ -62,7 +63,7 @@ public final class StoreConfig {
     }
 
     private StoreService storeService() {
-        return new ConvenienceStoreService(productFinder(), promotionFinder());
+        return new ConvenienceStoreService(productFinder(), promotionFinder(), new PromotionChecker());
     }
 
     private ProductFinder productFinder() {

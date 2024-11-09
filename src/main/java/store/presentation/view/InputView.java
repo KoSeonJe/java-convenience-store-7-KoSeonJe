@@ -7,4 +7,6 @@ public interface InputView {
     String confirmAdditionalItem(String name);
 
     String confirmOriginalPrice(String name, int quantityDifference);
+
+    String confirmApplyMembership();
 }

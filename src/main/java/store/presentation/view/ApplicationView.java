@@ -11,4 +11,6 @@ public interface ApplicationView {
     String confirmAdditionalItem(String name);
 
     String confirmOriginalPrice(String name, int quantityDifference);
+
+    String confirmApplyMembership();
 }
