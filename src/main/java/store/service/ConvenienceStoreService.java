@@ -12,10 +12,13 @@ public class ConvenienceStoreService implements StoreService {
 
     private final ProductFinder productFinder;
     private final PromotionFinder promotionFinder;
+    private final PromotionChecker promotionChecker;
 
-    public ConvenienceStoreService(ProductFinder productFinder, PromotionFinder promotionFinder) {
+    public ConvenienceStoreService(ProductFinder productFinder, PromotionFinder promotionFinder,
+            PromotionChecker promotionChecker) {
         this.productFinder = productFinder;
         this.promotionFinder = promotionFinder;
+        this.promotionChecker = promotionChecker;
     }
 
     @Override
@@ -31,7 +34,6 @@ public class ConvenienceStoreService implements StoreService {
             return false;
         }
         Promotion promotion = promotionFinder.findByName(promotionProduct.getPromotionName());
-        int applyPromotion = promotion.getBuy() + promotion.getGet();
-        return promotion.getBuy() == (requestItem.getQuantity() % applyPromotion);
+        return promotionChecker.shouldAddProduct(promotion, requestItem.getQuantity());
     }
 }
