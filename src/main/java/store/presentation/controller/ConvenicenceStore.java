@@ -47,7 +47,7 @@ public class ConvenicenceStore implements Store {
         if (quantityDifference == NO_OVER_PROMOTION_QUANTITY) {
             return;
         }
-
+        String answer = applicationView.confirmOriginalPrice(requestItem.getName(), quantityDifference);
     }
 
     private void checkAddPromotionQuantity(Promotion promotion, RequestItem requestItem) {
