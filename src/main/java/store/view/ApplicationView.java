@@ -5,5 +5,7 @@ import store.domain.Product;
 
 public interface ApplicationView {
 
-    void showIntroduction(List<Product> products);
+    void introduceItem(List<Product> products);
+
+    String inputPurchaseItem();
 }

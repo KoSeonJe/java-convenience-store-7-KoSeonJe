@@ -14,8 +14,13 @@ public class ApplicationConsoleView implements ApplicationView {
     }
 
     @Override
-    public void showIntroduction(List<Product> products) {
+    public void introduceItem(List<Product> products) {
         outputView.printWelcomeMessage();
         outputView.printInventory(products);
+    }
+
+    @Override
+    public String inputPurchaseItem() {
+        return inputView.requireInputItem();
     }
 }
