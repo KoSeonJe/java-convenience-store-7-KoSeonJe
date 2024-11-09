@@ -20,4 +20,8 @@ public class ProductFinder {
         productGroups.forEach(productGroup -> products.addAll(productGroup.getProducts()));
         return products;
     }
+
+    public ProductGroup findAllByName(String name) {
+        return productRepository.findByName(name).get();
+    }
 }

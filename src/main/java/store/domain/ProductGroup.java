@@ -18,4 +18,11 @@ public class ProductGroup {
     public void add(Product product) {
         products.add(product);
     }
+
+    public Product findpromotionProduct() {
+        return products.stream()
+                .filter(product -> product.getPromotionName() != null)
+                .findFirst()
+                .orElse(null);
+    }
 }
