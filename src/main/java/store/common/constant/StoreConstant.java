@@ -2,10 +2,6 @@ package store.common.constant;
 
 public final class StoreConstant {
 
-    private StoreConstant() {
-
-    }
-
     public static final int PRODUCT_NAME_INDEX = 0;
     public static final int PRODUCT_PRICE_INDEX = 1;
     public static final int PRODUCT_QUANTITY_INDEX = 2;
@@ -19,4 +15,8 @@ public final class StoreConstant {
 
     public static final int REQUEST_ITEM_NAME_INDEX = 0;
     public static final int REQUEST_ITEM_QUANTITY_INDEX = 1;
+
+    private StoreConstant() {
+
+    }
 }
