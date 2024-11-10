@@ -21,6 +21,6 @@ public class PromotionFinder {
         Promotion promotion = findByName(promotionProduct.getPromotionName());
         int promotionUnit = promotion.getGet() + promotion.getBuy();
         int promotionTarget = promotionProduct.getQuantity() - (promotionProduct.getQuantity() % promotionUnit);
-        return purchaseItemInfo.getAllQuantity() - promotionTarget;
+        return promotionTarget - purchaseItemInfo.getAllQuantity();
     }
 }

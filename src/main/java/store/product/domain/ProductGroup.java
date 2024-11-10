@@ -31,6 +31,6 @@ public class ProductGroup {
         int totalQuantity = products.stream()
                 .mapToInt(Product::getQuantity)
                 .sum();
-        return NumberUtils.isPositive(totalQuantity - quantity);
+        return NumberUtils.isNotNegative(totalQuantity - quantity);
     }
 }

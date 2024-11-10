@@ -33,9 +33,9 @@ public class PromotionService {
 
     public int getQuantityDifference(Product promotionProduct, PurchaseItemInfo purchaseItemInfo) {
         int nonDiscountedQuantity = promotionFinder.findNonDiscountedQuantity(promotionProduct, purchaseItemInfo);
-        if (!NumberUtils.isPositive(nonDiscountedQuantity)) {
+        if (NumberUtils.isNotNegative(nonDiscountedQuantity)) {
             return NO_OVER_PROMOTION_QUANTITY;
         }
-        return nonDiscountedQuantity;
+        return Math.abs(nonDiscountedQuantity);
     }
 }
