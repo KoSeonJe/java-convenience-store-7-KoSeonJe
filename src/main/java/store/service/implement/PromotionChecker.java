@@ -1,4 +1,4 @@
-package store.service;
+package store.service.implement;
 
 import store.domain.Promotion;
 

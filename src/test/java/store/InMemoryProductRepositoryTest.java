@@ -35,7 +35,7 @@ class InMemoryProductRepositoryTest {
         repository.saveAll(products);
 
         //then
-        ProductGroup findProduct = repository.findByName("콜라").orElse(null);
+        ProductGroup findProduct = repository.findByName("콜라");
         assertThat(findProduct).isNotNull();
         assertThat(findProduct.getProducts()).hasSize(1);
         assertThat(findProduct.getProducts().get(0).getName()).isEqualTo("콜라");
@@ -60,7 +60,7 @@ class InMemoryProductRepositoryTest {
         repository.saveAll(products2);
 
         //then
-        ProductGroup findProduct = repository.findByName("콜라").orElse(null);
+        ProductGroup findProduct = repository.findByName("콜라");
         assertThat(findProduct).isNotNull();
         assertThat(findProduct.getProducts()).hasSize(2);
         assertThat(findProduct.getProducts().get(1).getName()).isEqualTo("콜라");

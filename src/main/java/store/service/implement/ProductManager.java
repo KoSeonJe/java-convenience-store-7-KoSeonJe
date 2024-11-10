@@ -1,9 +1,8 @@
-package store.service;
+package store.service.implement;
 
 import java.util.List;
 import store.domain.Product;
 import store.domain.ProductGroup;
-import store.service.implement.ProductFinder;
 
 public class ProductManager {
     private final ProductFinder productFinder;

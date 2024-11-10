@@ -6,8 +6,10 @@ import java.util.List;
 import store.common.util.NumberUtils;
 import store.domain.Product;
 import store.domain.ProductGroup;
+import store.domain.PurchaseHistory;
 import store.domain.PurchaseInfo;
 import store.domain.PurchaseItemInfo;
+import store.service.implement.ProductManager;
 import store.service.implement.PromotionManager;
 import store.service.implement.PurchaseInfoManager;
 
@@ -60,5 +62,11 @@ public class ConvenienceStoreService implements StoreService {
     @Override
     public PurchaseInfo getRecentPurchaseInfo() {
         return purchaseInfoManager.getRecent();
+    }
+
+    @Override
+    public PurchaseHistory processPayment(PurchaseInfo purchaseInfo) {
+
+        return null;
     }
 }

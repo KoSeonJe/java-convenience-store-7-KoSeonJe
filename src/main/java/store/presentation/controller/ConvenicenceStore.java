@@ -3,26 +3,26 @@ package store.presentation.controller;
 import static store.common.constant.PromotionConstant.NO_OVER_PROMOTION_QUANTITY;
 
 import java.util.List;
-import store.common.support.StoreMapper;
 import store.common.util.StoreUtils;
 import store.domain.Product;
+import store.domain.PurchaseHistory;
 import store.domain.PurchaseInfo;
 import store.domain.PurchaseItemInfo;
 import store.presentation.dto.ProductAllInfo;
 import store.presentation.view.ApplicationView;
 import store.service.StoreService;
+import store.service.StoreValidator;
 
 public class ConvenicenceStore implements Store {
 
     private final ApplicationView applicationView;
     private final StoreService storeService;
-    private final StoreMapper storeMapper;
+    private final StoreValidator storeValidator;
 
-    public ConvenicenceStore(ApplicationView applicationView, StoreService storeService,
-            StoreMapper storeMapper) {
+    public ConvenicenceStore(ApplicationView applicationView, StoreService storeService, StoreValidator storeValidator) {
         this.applicationView = applicationView;
         this.storeService = storeService;
-        this.storeMapper = storeMapper;
+        this.storeValidator = storeValidator;
     }
 
     @Override
@@ -35,6 +35,7 @@ public class ConvenicenceStore implements Store {
 
     private void processPayment() {
         PurchaseInfo purchaseInfo = storeService.getRecentPurchaseInfo();
+        PurchaseHistory purchaseHistory = storeService.processPayment(purchaseInfo);
     }
 
     private void checkPromotion(List<PurchaseItemInfo> purchaseItemInfos) {
@@ -82,7 +83,8 @@ public class ConvenicenceStore implements Store {
     private List<PurchaseItemInfo> requirePurchaseItem() {
         List<Product> products = storeService.getAllProduct();
         applicationView.introduceItem(ProductAllInfo.from(products));
-        String inputtedItems = applicationView.inputPurchaseItem();
-        return storeMapper.toPurchaseInfo(inputtedItems);
+        List<PurchaseItemInfo> purchaseItemInfos = applicationView.inputPurchaseItem();
+        storeValidator.enoughQuantity(purchaseItemInfos);
+        return purchaseItemInfos;
     }
 }

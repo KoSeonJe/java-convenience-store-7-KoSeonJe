@@ -19,8 +19,9 @@ import store.repository.PromotionRepository;
 import store.repository.InMemoryPurchaseInfoRepository;
 import store.repository.PurchaseInfoRepository;
 import store.service.ConvenienceStoreService;
-import store.service.ProductManager;
-import store.service.PromotionChecker;
+import store.service.StoreValidator;
+import store.service.implement.ProductManager;
+import store.service.implement.PromotionChecker;
 import store.service.StoreService;
 import store.service.implement.ProductFinder;
 import store.service.implement.PromotionFinder;
@@ -44,11 +45,11 @@ public final class StoreConfig {
     }
 
     public Store store() {
-        return new ConvenicenceStore(applicationView(), storeService(), new StoreMapper());
+        return new ConvenicenceStore(applicationView(), storeService(), new StoreValidator());
     }
 
     private ApplicationView applicationView() {
-        return new ApplicationConsoleView(inputView(), outputView());
+        return new ApplicationConsoleView(inputView(), outputView(), new StoreMapper());
     }
 
     private InputView inputView() {

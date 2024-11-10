@@ -1,12 +1,14 @@
 package store.presentation.view;
 
+import java.util.List;
+import store.domain.PurchaseItemInfo;
 import store.presentation.dto.ProductAllInfo;
 
 public interface ApplicationView {
 
     void introduceItem(ProductAllInfo response);
 
-    String inputPurchaseItem();
+    List<PurchaseItemInfo> inputPurchaseItem();
 
     String confirmAdditionalItem(String name);
 

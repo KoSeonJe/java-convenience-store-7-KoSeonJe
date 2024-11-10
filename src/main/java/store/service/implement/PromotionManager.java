@@ -3,7 +3,6 @@ package store.service.implement;
 import store.domain.Product;
 import store.domain.Promotion;
 import store.domain.PurchaseItemInfo;
-import store.service.PromotionChecker;
 
 public class PromotionManager {
 

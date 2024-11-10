@@ -1,5 +1,8 @@
 package store.presentation.view.console;
 
+import java.util.List;
+import store.common.support.StoreMapper;
+import store.domain.PurchaseItemInfo;
 import store.presentation.dto.ProductAllInfo;
 import store.presentation.view.ApplicationView;
 import store.presentation.view.InputView;
@@ -9,10 +12,12 @@ public class ApplicationConsoleView implements ApplicationView {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private final StoreMapper storeMapper;
 
-    public ApplicationConsoleView(InputView inputView, OutputView outputView) {
+    public ApplicationConsoleView(InputView inputView, OutputView outputView, StoreMapper storeMapper) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.storeMapper = storeMapper;
     }
 
     @Override
@@ -22,8 +27,9 @@ public class ApplicationConsoleView implements ApplicationView {
     }
 
     @Override
-    public String inputPurchaseItem() {
-        return inputView.requireInputItem();
+    public List<PurchaseItemInfo> inputPurchaseItem() {
+        String inputtedItems = inputView.requireInputItem();
+        return storeMapper.toPurchaseInfo(inputtedItems);
     }
 
     @Override

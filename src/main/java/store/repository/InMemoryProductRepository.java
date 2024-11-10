@@ -3,7 +3,6 @@ package store.repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import store.domain.Product;
@@ -31,8 +30,8 @@ public class InMemoryProductRepository implements ProductRepository {
     }
 
     @Override
-    public Optional<ProductGroup> findByName(String name) {
-        return Optional.ofNullable(repository.get(name));
+    public ProductGroup findByName(String name) {
+        return repository.get(name);
     }
 
     @Override
