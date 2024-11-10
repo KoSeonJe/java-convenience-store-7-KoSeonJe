@@ -7,7 +7,11 @@ import store.product.implement.ProductFinder;
 import store.payment.domain.PurchaseItemInfo;
 
 public class ProductService {
+
+    private static final int NO_REMAIN_QUANTITY = 0;
+
     private final ProductFinder productFinder;
+
 
     public ProductService(ProductFinder productFinder) {
         this.productFinder = productFinder;
@@ -24,5 +28,25 @@ public class ProductService {
     public Product findPromotionProduct(PurchaseItemInfo purchaseItemInfo) {
         ProductGroup productGroup = productFinder.findAllByName(purchaseItemInfo.getName());
         return productGroup.findPromotionProduct();
+    }
+
+    public int deductPromotion(Product promotionProduct, int quantity) {
+        if (promotionProduct == null) {
+            return quantity;
+        }
+        if (promotionProduct.isEnough(quantity)) {
+            promotionProduct.deduct(quantity);
+            return NO_REMAIN_QUANTITY;
+        }
+        int remainQuantity = quantity - promotionProduct.getQuantity();
+        promotionProduct.quantityClear();
+        return remainQuantity;
+    }
+
+    public void deductOrigin(Product nonPromotionProduct, int remainQuantity) {
+        if (remainQuantity == NO_REMAIN_QUANTITY || nonPromotionProduct == null) {
+            return;
+        }
+        nonPromotionProduct.deduct(remainQuantity);
     }
 }

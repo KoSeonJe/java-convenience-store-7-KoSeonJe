@@ -27,6 +27,13 @@ public class ProductGroup {
                 .orElse(null);
     }
 
+    public Product findNonPromotionProduct() {
+        return products.stream()
+                .filter(product -> product.getPromotionName() == null)
+                .findFirst()
+                .orElse(null);
+    }
+
     public boolean isEnoughProducts(int quantity) {
         int totalQuantity = products.stream()
                 .mapToInt(Product::getQuantity)

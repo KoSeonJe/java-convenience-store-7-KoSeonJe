@@ -6,15 +6,15 @@ import store.payment.domain.PurchaseItemInfo;
 
 public class ConvenienceStoreFront implements StoreFront{
 
-    private final ProductController productController;
     private final PromotionController promotionController;
     private final PurchaseController purchaseController;
+    private final PaymentController paymentController;
 
-    public ConvenienceStoreFront(ProductController productController, PromotionController promotionController,
-            PurchaseController purchaseController) {
-        this.productController = productController;
+    public ConvenienceStoreFront(PromotionController promotionController,
+            PurchaseController purchaseController, PaymentController paymentController) {
         this.promotionController = promotionController;
         this.purchaseController = purchaseController;
+        this.paymentController = paymentController;
     }
 
     @Override
@@ -32,6 +32,6 @@ public class ConvenienceStoreFront implements StoreFront{
 
     @Override
     public void processPayment() {
-
+        paymentController.processPayment();
     }
 }

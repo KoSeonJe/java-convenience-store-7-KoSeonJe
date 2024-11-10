@@ -1,13 +1,18 @@
 package store.common.config;
 
+import store.ConvenicenceStore;
+import store.Store;
 import store.common.support.StoreMapper;
+import store.common.validate.StoreValidator;
 import store.infra.file.DataInitializer;
 import store.infra.file.FileDataInitializer;
 import store.infra.file.FileLoader;
-import store.ConvenicenceStore;
-import store.Store;
+import store.payment.repository.InMemoryPurchaseInfoRepository;
+import store.payment.repository.PurchaseInfoRepository;
+import store.payment.service.PaymentService;
+import store.payment.service.PurchaseInfoService;
 import store.presentation.controller.ConvenienceStoreFront;
-import store.presentation.controller.ProductController;
+import store.presentation.controller.PaymentController;
 import store.presentation.controller.PromotionController;
 import store.presentation.controller.PurchaseController;
 import store.presentation.controller.StoreFront;
@@ -17,19 +22,15 @@ import store.presentation.view.OutputView;
 import store.presentation.view.console.ApplicationConsoleView;
 import store.presentation.view.console.InputConsoleView;
 import store.presentation.view.console.OutputConsoleView;
+import store.product.implement.ProductFinder;
 import store.product.repository.InMemoryProductRepository;
-import store.promotion.repository.InMemoryPromotionRepository;
 import store.product.repository.ProductRepository;
-import store.promotion.repository.PromotionRepository;
-import store.purchase.repository.InMemoryPurchaseInfoRepository;
-import store.purchase.repository.PurchaseInfoRepository;
-import store.common.validate.StoreValidator;
 import store.product.service.ProductService;
 import store.promotion.implement.PromotionChecker;
-import store.product.implement.ProductFinder;
 import store.promotion.implement.PromotionFinder;
+import store.promotion.repository.InMemoryPromotionRepository;
+import store.promotion.repository.PromotionRepository;
 import store.promotion.service.PromotionService;
-import store.purchase.service.PurchaseInfoService;
 
 public final class StoreConfig {
 
@@ -72,30 +73,34 @@ public final class StoreConfig {
     }
 
     private StoreFront storeService() {
-        return new ConvenienceStoreFront(productController(), promotionController(), purchaseController());
-    }
-
-    private ProductController productController() {
-        return new ProductController(productManager());
+        return new ConvenienceStoreFront(promotionController(), purchaseController(), paymentController());
     }
 
     private PromotionController promotionController() {
-        return new PromotionController(applicationView(),promotionManager(),productManager());
+        return new PromotionController(applicationView(), promotionService(), productService());
     }
 
     private PurchaseController purchaseController() {
-        return new PurchaseController(productManager(), applicationView(), storeValidator(), purchaseInfoManager());
+        return new PurchaseController(productService(), applicationView(), storeValidator(), purchaseInfoService());
     }
 
-    private ProductService productManager() {
+    private PaymentController paymentController() {
+        return new PaymentController(purchaseInfoService(), paymentService());
+    }
+
+    private PaymentService paymentService() {
+        return new PaymentService(productService());
+    }
+
+    private ProductService productService() {
         return new ProductService(productFinder());
     }
 
-    private PromotionService promotionManager() {
+    private PromotionService promotionService() {
         return new PromotionService(promotionFinder(), new PromotionChecker());
     }
 
-    private PurchaseInfoService purchaseInfoManager() {
+    private PurchaseInfoService purchaseInfoService() {
         return new PurchaseInfoService(purchaseInfoRepository());
     }
 

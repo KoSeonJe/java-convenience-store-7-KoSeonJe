@@ -35,7 +35,19 @@ public class Product {
         return promotionName;
     }
 
+    public void deduct(int purchaseQuantity) {
+        this.quantity = this.quantity - purchaseQuantity;
+    }
+
     public static Product create(String name, BigDecimal price, int quantity, String promotionName) {
         return new Product(name, price, quantity, promotionName);
+    }
+
+    public boolean isEnough(int purchaseQuantity) {
+        return this.quantity >= purchaseQuantity;
+    }
+
+    public void quantityClear() {
+        this.quantity = 0;
     }
 }
