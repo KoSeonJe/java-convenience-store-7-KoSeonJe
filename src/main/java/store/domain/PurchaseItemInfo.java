@@ -35,7 +35,7 @@ public class PurchaseItemInfo {
         this.originQuantity = 0;
     }
 
-    public void changePromotion(int quantityDifference) {
+    public void updatePromotionQuantity(int quantityDifference) {
         this.originQuantity -= quantityDifference;
         this.promotionQuantity = this.originQuantity;
         this.originQuantity = quantityDifference;

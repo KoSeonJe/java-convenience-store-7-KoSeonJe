@@ -56,4 +56,9 @@ public class ConvenienceStoreService implements StoreService {
     public void savePurchaseInfo(PurchaseInfo purchaseInfo) {
         purchaseInfoManager.save(purchaseInfo);
     }
+
+    @Override
+    public PurchaseInfo getRecentPurchaseInfo() {
+        return purchaseInfoManager.getRecent();
+    }
 }

@@ -14,4 +14,8 @@ public class PurchaseInfoManager {
     public void save(PurchaseInfo purchaseInfo) {
         purchaseInfoRepository.save(purchaseInfo);
     }
+
+    public PurchaseInfo getRecent() {
+        return purchaseInfoRepository.getRecent();
+    }
 }

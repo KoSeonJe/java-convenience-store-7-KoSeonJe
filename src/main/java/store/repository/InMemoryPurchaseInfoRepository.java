@@ -22,4 +22,9 @@ public class InMemoryPurchaseInfoRepository implements PurchaseInfoRepository {
     public void save(PurchaseInfo purchaseInfo) {
         repository.add(purchaseInfo);
     }
+
+    @Override
+    public PurchaseInfo getRecent() {
+        return repository.getLast();
+    }
 }

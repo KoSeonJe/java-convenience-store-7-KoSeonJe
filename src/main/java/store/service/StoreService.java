@@ -16,4 +16,6 @@ public interface StoreService {
     int getQuantityDifference(Product promotionProduct, PurchaseItemInfo purchaseItemInfo);
 
     void savePurchaseInfo(PurchaseInfo purchaseInfo);
+
+    PurchaseInfo getRecentPurchaseInfo();
 }

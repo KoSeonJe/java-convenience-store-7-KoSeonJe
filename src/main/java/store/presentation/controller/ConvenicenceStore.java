@@ -29,7 +29,12 @@ public class ConvenicenceStore implements Store {
     public void open() {
         List<PurchaseItemInfo> purchaseItemInfos = requirePurchaseItem();
         checkPromotion(purchaseItemInfos);
+        processPayment();
 
+    }
+
+    private void processPayment() {
+        PurchaseInfo purchaseInfo = storeService.getRecentPurchaseInfo();
     }
 
     private void checkPromotion(List<PurchaseItemInfo> purchaseItemInfos) {
@@ -47,10 +52,7 @@ public class ConvenicenceStore implements Store {
 
     private boolean checkMembership() {
         String answer = applicationView.confirmApplyMembership();
-        if (StoreUtils.isAgree(answer)) {
-            return true;
-        }
-        return false;
+        return StoreUtils.isAgree(answer);
     }
 
     private void checkAddPromotionQuantity(Product promotionProduct, PurchaseItemInfo purchaseItemInfo) {
@@ -70,7 +72,7 @@ public class ConvenicenceStore implements Store {
         }
         String answer = applicationView.confirmOriginalPrice(purchaseItemInfo.getName(), quantityDifference);
         if (StoreUtils.isAgree(answer)) {
-            purchaseItemInfo.changePromotion(quantityDifference);
+            purchaseItemInfo.updatePromotionQuantity(quantityDifference);
             return;
         }
         purchaseItemInfo.deleteNoPromotion(quantityDifference);
