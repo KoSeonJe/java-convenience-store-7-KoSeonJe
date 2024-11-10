@@ -9,53 +9,50 @@ import store.domain.ProductGroup;
 import store.domain.Promotion;
 import store.domain.PurchaseInfo;
 import store.domain.PurchaseItemInfo;
-import store.service.implement.ProductFinder;
-import store.service.implement.PromotionFinder;
+import store.service.implement.PromotionManager;
 import store.service.implement.PurchaseInfoManager;
 
 public class ConvenienceStoreService implements StoreService {
 
-    private final ProductFinder productFinder;
-    private final PromotionFinder promotionFinder;
-    private final PromotionChecker promotionChecker;
+    private final ProductManager productManager;
+    private final PromotionManager promotionManager;
     private final PurchaseInfoManager purchaseInfoManager;
 
-    public ConvenienceStoreService(ProductFinder productFinder, PromotionFinder promotionFinder,
-            PromotionChecker promotionChecker, PurchaseInfoManager purchaseInfoManager) {
-        this.productFinder = productFinder;
-        this.promotionFinder = promotionFinder;
-        this.promotionChecker = promotionChecker;
+    public ConvenienceStoreService(ProductManager productManager, PromotionManager promotionManager,
+            PurchaseInfoManager purchaseInfoManager) {
+        this.productManager = productManager;
+        this.promotionManager = promotionManager;
         this.purchaseInfoManager = purchaseInfoManager;
     }
 
     @Override
     public List<Product> getAllProduct() {
-        return productFinder.getAllProduct();
+        return productManager.getAllProduct();
     }
 
     @Override
     public boolean checkAddPromotionQuantity(Promotion promotion, PurchaseItemInfo purchaseItemInfo) {
-        ProductGroup productGroup = productFinder.findAllByName(purchaseItemInfo.getName());
+        ProductGroup productGroup = productManager.findAllByName(purchaseItemInfo.getName());
         Product promotionProduct = productGroup.findpromotionProduct();
         if (promotionProduct.getQuantity() == purchaseItemInfo.getOriginQuantity()) {
             return false;
         }
-        return promotionChecker.shouldAddProduct(promotion, purchaseItemInfo.getOriginQuantity());
+        return promotionManager.shouldAddProduct(promotion, purchaseItemInfo.getOriginQuantity());
     }
 
     @Override
     public Promotion findPromotion(PurchaseItemInfo purchaseItemInfo) {
-        ProductGroup productGroup = productFinder.findAllByName(purchaseItemInfo.getName());
+        ProductGroup productGroup = productManager.findAllByName(purchaseItemInfo.getName());
         Product promotionProduct = productGroup.findpromotionProduct();
         if(promotionProduct == null) {
             return null;
         }
-        return promotionFinder.findByName(promotionProduct.getPromotionName());
+        return promotionManager.findByName(promotionProduct.getPromotionName());
     }
 
     @Override
     public int getQuantityDifference(Promotion promotion, PurchaseItemInfo purchaseItemInfo) {
-        ProductGroup productGroup = productFinder.findAllByName(purchaseItemInfo.getName());
+        ProductGroup productGroup = productManager.findAllByName(purchaseItemInfo.getName());
         Product promotionProduct = productGroup.findpromotionProduct();
         int difference = promotionProduct.getQuantity() - purchaseItemInfo.getOriginQuantity();
         if (NumberUtils.isPositive(difference)) {

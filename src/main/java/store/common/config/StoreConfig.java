@@ -16,11 +16,16 @@ import store.repository.InMemoryProductRepository;
 import store.repository.InMemoryPromotionRepository;
 import store.repository.ProductRepository;
 import store.repository.PromotionRepository;
+import store.repository.InMemoryPurchaseInfoRepository;
+import store.repository.PurchaseInfoRepository;
 import store.service.ConvenienceStoreService;
+import store.service.ProductManager;
 import store.service.PromotionChecker;
 import store.service.StoreService;
 import store.service.implement.ProductFinder;
 import store.service.implement.PromotionFinder;
+import store.service.implement.PromotionManager;
+import store.service.implement.PurchaseInfoManager;
 
 public final class StoreConfig {
 
@@ -63,7 +68,23 @@ public final class StoreConfig {
     }
 
     private StoreService storeService() {
-        return new ConvenienceStoreService(productFinder(), promotionFinder(), new PromotionChecker());
+        return new ConvenienceStoreService(productManager(), promotionManager(), purchaseInfoManager());
+    }
+
+    private ProductManager productManager() {
+        return new ProductManager(productFinder());
+    }
+
+    private PromotionManager promotionManager() {
+        return new PromotionManager(promotionFinder(), new PromotionChecker());
+    }
+
+    private PurchaseInfoManager purchaseInfoManager() {
+        return new PurchaseInfoManager(purchaseInfoRepository());
+    }
+
+    private PurchaseInfoRepository purchaseInfoRepository() {
+        return InMemoryPurchaseInfoRepository.getInstance();
     }
 
     private ProductFinder productFinder() {
