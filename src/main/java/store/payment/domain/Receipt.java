@@ -4,9 +4,9 @@ import java.util.List;
 
 public record Receipt(
         List<PaymentProduct> paymentProducts,
-        int totalAmount,
-        int eventDiscount,
+        int finalAmount,
+        int applyPromotionDiscount,
         int membershipDiscount,
-        int finalAmount
+        int paymentPrice
 ) {
 }

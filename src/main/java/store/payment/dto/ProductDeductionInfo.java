@@ -10,6 +10,11 @@ public record ProductDeductionInfo(
         return promotion / promotionUnit;
     }
 
+    public int getNonPromotionQuantity(int promotionUnit) {
+        int remainQuantity = promotion % promotionUnit;
+        return remainQuantity + origin;
+    }
+
     public int getAllQuantity() {
         return origin + promotion;
     }

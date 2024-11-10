@@ -7,4 +7,9 @@ public record PaymentProduct(
         int applyPromotionQuantity
 ) {
 
+    public int getApplyPromotionPrice() {
+        int price = totalPrice / quantity;
+        return price * applyPromotionQuantity;
+    }
+
 }
