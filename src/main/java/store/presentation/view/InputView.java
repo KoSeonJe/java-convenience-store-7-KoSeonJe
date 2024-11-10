@@ -4,7 +4,7 @@ public interface InputView {
 
     String requireInputItem();
 
-    String confirmAdditionalItem(String name);
+    String confirmAdditionalItem(String name, int getCount);
 
     String confirmOriginalPrice(String name, int quantityDifference);
 

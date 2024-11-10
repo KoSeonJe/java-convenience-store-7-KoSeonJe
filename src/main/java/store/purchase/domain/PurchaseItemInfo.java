@@ -33,8 +33,8 @@ public class PurchaseItemInfo {
         return promotionQuantity;
     }
 
-    public void addAllQuantity() {
-        allQuantity++;
+    public void addAllQuantity(int getCount) {
+        allQuantity = allQuantity + getCount;
     }
 
     public void updateOriginQuantity() {

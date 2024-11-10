@@ -33,8 +33,8 @@ public class ApplicationConsoleView implements ApplicationView {
     }
 
     @Override
-    public String confirmAdditionalItem(String name) {
-        return inputView.confirmAdditionalItem(name);
+    public String confirmAdditionalItem(String name, int getCount) {
+        return inputView.confirmAdditionalItem(name, getCount);
     }
 
     @Override

@@ -7,6 +7,7 @@ import store.common.util.StoreUtils;
 import store.presentation.view.ApplicationView;
 import store.product.domain.Product;
 import store.product.service.ProductService;
+import store.promotion.domain.Promotion;
 import store.promotion.service.PromotionService;
 import store.purchase.domain.PurchaseItemInfo;
 
@@ -53,9 +54,10 @@ public class PromotionController {
         if (!promotionService.checkAddPromotionQuantity(promotionProduct, purchaseItemInfo)) {
             return;
         }
-        String answer = applicationView.confirmAdditionalItem(purchaseItemInfo.getName());
+        Promotion promotion = promotionService.findByName(promotionProduct.getPromotionName());
+        String answer = applicationView.confirmAdditionalItem(purchaseItemInfo.getName(), promotion.getGet());
         if (StoreUtils.isAgree(answer)) {
-            purchaseItemInfo.addAllQuantity();
+            purchaseItemInfo.addAllQuantity(promotion.getGet());
         }
     }
 
