@@ -22,6 +22,6 @@ public class ProductFinder {
     }
 
     public ProductGroup findAllByName(String name) {
-        return productRepository.findByName(name).get();
+        return productRepository.findByName(name);
     }
 }

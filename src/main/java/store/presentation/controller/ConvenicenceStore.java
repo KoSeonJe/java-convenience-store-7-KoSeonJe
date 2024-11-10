@@ -62,7 +62,7 @@ public class ConvenicenceStore implements Store {
         }
         String answer = applicationView.confirmAdditionalItem(purchaseItemInfo.getName());
         if (StoreUtils.isAgree(answer)) {
-            purchaseItemInfo.addQuantity();
+            purchaseItemInfo.addAllQuantity();
         }
     }
 
@@ -73,7 +73,7 @@ public class ConvenicenceStore implements Store {
         }
         String answer = applicationView.confirmOriginalPrice(purchaseItemInfo.getName(), quantityDifference);
         if (StoreUtils.isAgree(answer)) {
-            purchaseItemInfo.updatePromotionQuantity(quantityDifference);
+            purchaseItemInfo.updateQuantity(quantityDifference);
             return;
         }
         purchaseItemInfo.deleteNoPromotion(quantityDifference);

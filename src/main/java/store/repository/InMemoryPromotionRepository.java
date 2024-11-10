@@ -2,7 +2,6 @@ package store.repository;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import store.domain.Promotion;
 
@@ -25,8 +24,8 @@ public class InMemoryPromotionRepository implements PromotionRepository {
     }
 
     @Override
-    public Optional<Promotion> findByName(String name) {
-        return Optional.ofNullable(repository.get(name));
+    public Promotion findByName(String name) {
+        return repository.get(name);
     }
 
     @Override

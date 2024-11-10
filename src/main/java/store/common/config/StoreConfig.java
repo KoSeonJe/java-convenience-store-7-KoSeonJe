@@ -45,7 +45,7 @@ public final class StoreConfig {
     }
 
     public Store store() {
-        return new ConvenicenceStore(applicationView(), storeService(), new StoreValidator());
+        return new ConvenicenceStore(applicationView(), storeService(), new StoreValidator(productFinder()));
     }
 
     private ApplicationView applicationView() {

@@ -28,8 +28,8 @@ class FileDataInitializerTest {
     void init() {
         assertSimpleTest(() -> {
             fileDataInitializer.init();
-            ProductGroup findProductGroup = productRepository.findByName("콜라").orElse(null);
-            Promotion promotion = promotionRepository.findByName("MD추천상품").orElse(null);
+            ProductGroup findProductGroup = productRepository.findByName("콜라");
+            Promotion promotion = promotionRepository.findByName("MD추천상품");
 
             assertThat(findProductGroup).isNotNull();
             assertThat(findProductGroup.getProducts()).hasSize(2);

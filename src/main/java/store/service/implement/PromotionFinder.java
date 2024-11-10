@@ -12,6 +12,6 @@ public class PromotionFinder {
     }
 
     public Promotion findByName(String promotionName) {
-        return promotionRepository.findByName(promotionName).get();
+        return promotionRepository.findByName(promotionName);
     }
 }
