@@ -24,4 +24,14 @@ public class StoreValidator {
             }
         });
     }
+
+    public void existProduct(List<PurchaseItemInfo> purchaseItemInfos) {
+        purchaseItemInfos.forEach(purchaseItemInfo -> {
+            String name = purchaseItemInfo.getName();
+            ProductGroup productGroup = productRepository.findByName(name);
+            if(productGroup == null) {
+                throw new IllegalArgumentException(NO_ENOUGH_PRODUCT_MESSAGE);
+            }
+        });
+    }
 }

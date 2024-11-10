@@ -79,12 +79,12 @@ public class ConvenicenceStore implements Store {
         purchaseItemInfo.deleteNoPromotion(quantityDifference);
     }
 
-    //TODO: 존재하지 않은 상품 입력한 경우, 구매 수량이 재고 수량을 초과한 경우 예외 처리
     private List<PurchaseItemInfo> requirePurchaseItem() {
         List<Product> products = storeService.getAllProduct();
         applicationView.introduceItem(ProductAllInfo.from(products));
         List<PurchaseItemInfo> purchaseItemInfos = applicationView.inputPurchaseItem();
         storeValidator.enoughQuantity(purchaseItemInfos);
+        storeValidator.existProduct(purchaseItemInfos);
         return purchaseItemInfos;
     }
 }
