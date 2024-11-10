@@ -6,52 +6,29 @@ public class PurchaseItemInfo {
 
     private String name;
 
-    private int allQuantity;
+    private int quantity;
 
-    private int originQuantity;
-
-    private int promotionQuantity;
-
-    public PurchaseItemInfo(String name, int allQuantity) {
+    public PurchaseItemInfo(String name, int quantity) {
         this.name = name;
-        this.allQuantity = allQuantity;
+        this.quantity = quantity;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getAllQuantity() {
-        return allQuantity;
-    }
-
-    public int getOriginQuantity() {
-        return originQuantity;
-    }
-
-    public int getPromotionQuantity() {
-        return promotionQuantity;
+    public int getQuantity() {
+        return quantity;
     }
 
     public void addAllQuantity(int getCount) {
-        allQuantity = allQuantity + getCount;
-    }
-
-    public void updateOriginQuantity() {
-        this.originQuantity = allQuantity;
-    }
-
-    public void updatePromotionQuantity() {
-        this.promotionQuantity = allQuantity;
+        quantity = quantity + getCount;
     }
 
     public void updateQuantityByAnswer(String answer, int quantityDifference) {
         if (StoreUtils.isAgree(answer)) {
-            this.originQuantity = quantityDifference;
-            this.promotionQuantity = allQuantity - quantityDifference;
             return;
         }
-        this.allQuantity -= quantityDifference;
-        this.promotionQuantity = allQuantity;
+        quantity = quantity - quantityDifference;
     }
 }

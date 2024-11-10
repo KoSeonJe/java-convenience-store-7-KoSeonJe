@@ -19,7 +19,7 @@ public class StoreValidator {
         purchaseItemInfos.forEach(purchaseItemInfo -> {
             String name = purchaseItemInfo.getName();
             ProductGroup productGroup = productFinder.findAllByName(name);
-            if (!productGroup.isEnoughProducts(purchaseItemInfo.getAllQuantity())) {
+            if (!productGroup.isEnoughProducts(purchaseItemInfo.getQuantity())) {
                 throw new IllegalArgumentException(NO_ENOUGH_PRODUCT_MESSAGE);
             }
         });

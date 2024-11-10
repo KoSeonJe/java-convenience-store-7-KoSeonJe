@@ -24,11 +24,11 @@ public class PromotionService {
     }
 
     public boolean checkAddPromotionQuantity(Product promotionProduct, PurchaseItemInfo purchaseItemInfo) {
-        if (promotionProduct.getQuantity() == purchaseItemInfo.getAllQuantity()) {
+        if (promotionProduct.getQuantity() == purchaseItemInfo.getQuantity()) {
             return false;
         }
         Promotion promotion = promotionFinder.findByName(promotionProduct.getPromotionName());
-        return promotionChecker.shouldAddProduct(promotion, purchaseItemInfo.getAllQuantity());
+        return promotionChecker.shouldAddProduct(promotion, purchaseItemInfo.getQuantity());
     }
 
     public int getQuantityDifference(Product promotionProduct, PurchaseItemInfo purchaseItemInfo) {

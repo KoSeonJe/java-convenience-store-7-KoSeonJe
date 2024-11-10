@@ -24,8 +24,8 @@ public class ConvenienceStoreFront implements StoreFront{
 
     @Override
     public void checkPromotion(List<PurchaseItemInfo> purchaseItemInfos) {
-        promotionController.checkAllAddPromotionQuantity(purchaseItemInfos);
         promotionController.checkAllOverPromotionQuantity(purchaseItemInfos);
+        promotionController.checkAllAddPromotionQuantity(purchaseItemInfos);
         boolean isMembership = promotionController.checkMembership();
         purchaseController.savePurchaseInfo(new PurchaseInfo(purchaseItemInfos, isMembership));
     }

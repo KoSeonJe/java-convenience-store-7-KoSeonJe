@@ -38,7 +38,6 @@ public class PromotionController {
         purchaseItemInfos.forEach(purchaseItemInfo -> {
             Product promotionProduct = productService.findPromotionProduct(purchaseItemInfo);
             if (promotionProduct == null) {
-                purchaseItemInfo.updateOriginQuantity();
                 return;
             }
             checkOverPromotionQuantity(promotionProduct, purchaseItemInfo);
@@ -64,7 +63,6 @@ public class PromotionController {
     private void checkOverPromotionQuantity(Product promotionProduct, PurchaseItemInfo purchaseItemInfo) {
         int quantityDifference = promotionService.getQuantityDifference(promotionProduct, purchaseItemInfo);
         if (quantityDifference == NO_OVER_PROMOTION_QUANTITY) {
-            purchaseItemInfo.updatePromotionQuantity();
             return;
         }
         String answer = applicationView.confirmOriginalPrice(purchaseItemInfo.getName(), quantityDifference);
