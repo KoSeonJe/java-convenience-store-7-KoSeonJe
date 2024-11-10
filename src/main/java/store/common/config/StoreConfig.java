@@ -4,29 +4,32 @@ import store.common.support.StoreMapper;
 import store.infra.file.DataInitializer;
 import store.infra.file.FileDataInitializer;
 import store.infra.file.FileLoader;
-import store.presentation.controller.ConvenicenceStore;
-import store.presentation.controller.Store;
+import store.ConvenicenceStore;
+import store.Store;
+import store.presentation.controller.ConvenienceStoreFront;
+import store.presentation.controller.ProductController;
+import store.presentation.controller.PromotionController;
+import store.presentation.controller.PurchaseController;
+import store.presentation.controller.StoreFront;
 import store.presentation.view.ApplicationView;
 import store.presentation.view.InputView;
 import store.presentation.view.OutputView;
 import store.presentation.view.console.ApplicationConsoleView;
 import store.presentation.view.console.InputConsoleView;
 import store.presentation.view.console.OutputConsoleView;
-import store.repository.InMemoryProductRepository;
-import store.repository.InMemoryPromotionRepository;
-import store.repository.ProductRepository;
-import store.repository.PromotionRepository;
-import store.repository.InMemoryPurchaseInfoRepository;
-import store.repository.PurchaseInfoRepository;
-import store.service.ConvenienceStoreService;
-import store.service.StoreValidator;
-import store.service.implement.ProductManager;
-import store.service.implement.PromotionChecker;
-import store.service.StoreService;
-import store.service.implement.ProductFinder;
-import store.service.implement.PromotionFinder;
-import store.service.implement.PromotionManager;
-import store.service.implement.PurchaseInfoManager;
+import store.product.repository.InMemoryProductRepository;
+import store.promotion.repository.InMemoryPromotionRepository;
+import store.product.repository.ProductRepository;
+import store.promotion.repository.PromotionRepository;
+import store.purchase.repository.InMemoryPurchaseInfoRepository;
+import store.purchase.repository.PurchaseInfoRepository;
+import store.common.validate.StoreValidator;
+import store.product.service.ProductService;
+import store.promotion.implement.PromotionChecker;
+import store.product.implement.ProductFinder;
+import store.promotion.implement.PromotionFinder;
+import store.promotion.service.PromotionService;
+import store.purchase.service.PurchaseInfoService;
 
 public final class StoreConfig {
 
@@ -45,7 +48,7 @@ public final class StoreConfig {
     }
 
     public Store store() {
-        return new ConvenicenceStore(applicationView(), storeService(), new StoreValidator(productFinder()));
+        return new ConvenicenceStore(applicationView(), storeService());
     }
 
     private ApplicationView applicationView() {
@@ -68,20 +71,32 @@ public final class StoreConfig {
         return InMemoryPromotionRepository.getInstance();
     }
 
-    private StoreService storeService() {
-        return new ConvenienceStoreService(productManager(), promotionManager(), purchaseInfoManager());
+    private StoreFront storeService() {
+        return new ConvenienceStoreFront(productController(), promotionController(), purchaseController());
     }
 
-    private ProductManager productManager() {
-        return new ProductManager(productFinder());
+    private ProductController productController() {
+        return new ProductController(productManager());
     }
 
-    private PromotionManager promotionManager() {
-        return new PromotionManager(promotionFinder(), new PromotionChecker());
+    private PromotionController promotionController() {
+        return new PromotionController(applicationView(),promotionManager(),productManager());
     }
 
-    private PurchaseInfoManager purchaseInfoManager() {
-        return new PurchaseInfoManager(purchaseInfoRepository());
+    private PurchaseController purchaseController() {
+        return new PurchaseController(productManager(), applicationView(), storeValidator(), purchaseInfoManager());
+    }
+
+    private ProductService productManager() {
+        return new ProductService(productFinder());
+    }
+
+    private PromotionService promotionManager() {
+        return new PromotionService(promotionFinder(), new PromotionChecker());
+    }
+
+    private PurchaseInfoService purchaseInfoManager() {
+        return new PurchaseInfoService(purchaseInfoRepository());
     }
 
     private PurchaseInfoRepository purchaseInfoRepository() {
@@ -94,5 +109,9 @@ public final class StoreConfig {
 
     private PromotionFinder promotionFinder() {
         return new PromotionFinder(promotionRepository());
+    }
+
+    private StoreValidator storeValidator() {
+        return new StoreValidator(productFinder());
     }
 }

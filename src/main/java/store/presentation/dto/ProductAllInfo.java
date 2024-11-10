@@ -1,7 +1,7 @@
 package store.presentation.dto;
 
 import java.util.List;
-import store.domain.Product;
+import store.product.domain.Product;
 
 public record ProductAllInfo(
         List<ProductInfo> productInfos

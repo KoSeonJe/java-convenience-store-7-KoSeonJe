@@ -2,8 +2,8 @@ package store.infra.file;
 
 import java.util.List;
 import store.common.support.StoreMapper;
-import store.repository.ProductRepository;
-import store.repository.PromotionRepository;
+import store.product.repository.ProductRepository;
+import store.promotion.repository.PromotionRepository;
 
 public class FileDataInitializer implements DataInitializer {
 

@@ -6,11 +6,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import fixture.StoreFixture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import store.domain.ProductGroup;
-import store.domain.Promotion;
+import store.product.domain.ProductGroup;
+import store.promotion.domain.Promotion;
 import store.infra.file.FileDataInitializer;
-import store.repository.InMemoryProductRepository;
-import store.repository.InMemoryPromotionRepository;
+import store.product.repository.InMemoryProductRepository;
+import store.promotion.repository.InMemoryPromotionRepository;
 
 class FileDataInitializerTest {
 

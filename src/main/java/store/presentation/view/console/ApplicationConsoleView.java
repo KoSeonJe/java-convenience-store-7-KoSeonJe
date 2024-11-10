@@ -2,7 +2,7 @@ package store.presentation.view.console;
 
 import java.util.List;
 import store.common.support.StoreMapper;
-import store.domain.PurchaseItemInfo;
+import store.purchase.domain.PurchaseItemInfo;
 import store.presentation.dto.ProductAllInfo;
 import store.presentation.view.ApplicationView;
 import store.presentation.view.InputView;

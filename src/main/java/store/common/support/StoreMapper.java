@@ -16,9 +16,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import store.domain.Product;
-import store.domain.Promotion;
-import store.domain.PurchaseItemInfo;
+import store.product.domain.Product;
+import store.promotion.domain.Promotion;
+import store.purchase.domain.PurchaseItemInfo;
 
 public class StoreMapper {
 

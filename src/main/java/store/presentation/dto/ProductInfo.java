@@ -1,7 +1,7 @@
 package store.presentation.dto;
 
 import java.math.BigDecimal;
-import store.domain.Product;
+import store.product.domain.Product;
 
 public record ProductInfo(
         String name,

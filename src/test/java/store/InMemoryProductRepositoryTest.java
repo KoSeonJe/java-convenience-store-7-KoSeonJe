@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import store.domain.Product;
-import store.domain.ProductGroup;
-import store.repository.InMemoryProductRepository;
+import store.product.domain.Product;
+import store.product.domain.ProductGroup;
+import store.product.repository.InMemoryProductRepository;
 
 class InMemoryProductRepositoryTest {
 

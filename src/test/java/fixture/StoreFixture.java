@@ -2,8 +2,8 @@ package fixture;
 
 import store.infra.file.FileDataInitializer;
 import store.infra.file.FileLoader;
-import store.repository.InMemoryProductRepository;
-import store.repository.InMemoryPromotionRepository;
+import store.product.repository.InMemoryProductRepository;
+import store.promotion.repository.InMemoryPromotionRepository;
 import store.common.support.StoreMapper;
 
 public class StoreFixture {
