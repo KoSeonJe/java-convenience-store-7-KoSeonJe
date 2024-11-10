@@ -6,7 +6,6 @@ import java.util.List;
 import store.common.util.NumberUtils;
 import store.domain.Product;
 import store.domain.ProductGroup;
-import store.domain.Promotion;
 import store.domain.PurchaseInfo;
 import store.domain.PurchaseItemInfo;
 import store.service.implement.PromotionManager;
@@ -31,29 +30,21 @@ public class ConvenienceStoreService implements StoreService {
     }
 
     @Override
-    public boolean checkAddPromotionQuantity(Promotion promotion, PurchaseItemInfo purchaseItemInfo) {
-        ProductGroup productGroup = productManager.findAllByName(purchaseItemInfo.getName());
-        Product promotionProduct = productGroup.findpromotionProduct();
+    public boolean checkAddPromotionQuantity(Product promotionProduct, PurchaseItemInfo purchaseItemInfo) {
         if (promotionProduct.getQuantity() == purchaseItemInfo.getOriginQuantity()) {
             return false;
         }
-        return promotionManager.checkAddProduct(promotion, purchaseItemInfo.getOriginQuantity());
+        return promotionManager.checkAddProduct(promotionProduct, purchaseItemInfo.getOriginQuantity());
     }
 
     @Override
-    public Promotion findPromotion(PurchaseItemInfo purchaseItemInfo) {
+    public Product findPromotionProduct(PurchaseItemInfo purchaseItemInfo) {
         ProductGroup productGroup = productManager.findAllByName(purchaseItemInfo.getName());
-        Product promotionProduct = productGroup.findpromotionProduct();
-        if(promotionProduct == null) {
-            return null;
-        }
-        return promotionManager.findByName(promotionProduct.getPromotionName());
+        return productGroup.findPromotionProduct();
     }
 
     @Override
-    public int getQuantityDifference(Promotion promotion, PurchaseItemInfo purchaseItemInfo) {
-        ProductGroup productGroup = productManager.findAllByName(purchaseItemInfo.getName());
-        Product promotionProduct = productGroup.findpromotionProduct();
+    public int getQuantityDifference(Product promotionProduct, PurchaseItemInfo purchaseItemInfo) {
         int nonDiscountedQuantity = promotionManager.getNonDiscountedQuantity(promotionProduct, purchaseItemInfo);
         if (!NumberUtils.isPositive(nonDiscountedQuantity)) {
             return NO_OVER_PROMOTION_QUANTITY;

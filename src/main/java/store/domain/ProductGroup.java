@@ -19,7 +19,7 @@ public class ProductGroup {
         products.add(product);
     }
 
-    public Product findpromotionProduct() {
+    public Product findPromotionProduct() {
         return products.stream()
                 .filter(product -> product.getPromotionName() != null)
                 .findFirst()

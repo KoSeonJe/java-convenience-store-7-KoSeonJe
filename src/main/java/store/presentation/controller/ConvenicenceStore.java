@@ -6,7 +6,6 @@ import java.util.List;
 import store.common.support.StoreMapper;
 import store.common.util.StoreUtils;
 import store.domain.Product;
-import store.domain.Promotion;
 import store.domain.PurchaseInfo;
 import store.domain.PurchaseItemInfo;
 import store.presentation.dto.ProductAllInfo;
@@ -35,12 +34,12 @@ public class ConvenicenceStore implements Store {
 
     private void checkPromotion(List<PurchaseItemInfo> purchaseItemInfos) {
         purchaseItemInfos.forEach(purchaseItemInfo -> {
-            Promotion promotion = storeService.findPromotion(purchaseItemInfo);
-            if (promotion == null) {
+            Product promotionProduct = storeService.findPromotionProduct(purchaseItemInfo);
+            if (promotionProduct == null) {
                 return;
             }
-            checkAddPromotionQuantity(promotion, purchaseItemInfo);
-            checkOverPromotionQuantity(promotion, purchaseItemInfo);
+            checkAddPromotionQuantity(promotionProduct, purchaseItemInfo);
+            checkOverPromotionQuantity(promotionProduct, purchaseItemInfo);
         });
         boolean isMembership = checkMembership();
         storeService.savePurchaseInfo(new PurchaseInfo(purchaseItemInfos, isMembership));
@@ -54,8 +53,8 @@ public class ConvenicenceStore implements Store {
         return false;
     }
 
-    private void checkAddPromotionQuantity(Promotion promotion, PurchaseItemInfo purchaseItemInfo) {
-        if (!storeService.checkAddPromotionQuantity(promotion, purchaseItemInfo)) {
+    private void checkAddPromotionQuantity(Product promotionProduct, PurchaseItemInfo purchaseItemInfo) {
+        if (!storeService.checkAddPromotionQuantity(promotionProduct, purchaseItemInfo)) {
             return;
         }
         String answer = applicationView.confirmAdditionalItem(purchaseItemInfo.getName());
@@ -64,8 +63,8 @@ public class ConvenicenceStore implements Store {
         }
     }
 
-    private void checkOverPromotionQuantity(Promotion promotion, PurchaseItemInfo purchaseItemInfo) {
-        int quantityDifference = storeService.getQuantityDifference(promotion, purchaseItemInfo);
+    private void checkOverPromotionQuantity(Product promotionProduct, PurchaseItemInfo purchaseItemInfo) {
+        int quantityDifference = storeService.getQuantityDifference(promotionProduct, purchaseItemInfo);
         if (quantityDifference == NO_OVER_PROMOTION_QUANTITY) {
             return;
         }

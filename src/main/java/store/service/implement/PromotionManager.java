@@ -15,7 +15,8 @@ public class PromotionManager {
         this.promotionChecker = promotionChecker;
     }
 
-    public boolean checkAddProduct(Promotion promotion, int originQuantity) {
+    public boolean checkAddProduct(Product promotionProduct, int originQuantity) {
+        Promotion promotion = promotionFinder.findByName(promotionProduct.getPromotionName());
         return promotionChecker.shouldAddProduct(promotion, originQuantity);
     }
 
