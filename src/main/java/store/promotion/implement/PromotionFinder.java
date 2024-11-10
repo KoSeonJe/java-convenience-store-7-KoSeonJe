@@ -3,7 +3,7 @@ package store.promotion.implement;
 import store.product.domain.Product;
 import store.promotion.domain.Promotion;
 import store.promotion.repository.PromotionRepository;
-import store.purchase.domain.PurchaseItemInfo;
+import store.payment.domain.PurchaseItemInfo;
 
 public class PromotionFinder {
 

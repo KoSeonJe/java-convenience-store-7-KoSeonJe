@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import store.product.domain.Product;
 import store.promotion.domain.Promotion;
-import store.purchase.domain.PurchaseItemInfo;
+import store.payment.domain.PurchaseItemInfo;
 
 public class StoreMapper {
 

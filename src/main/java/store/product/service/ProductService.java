@@ -4,7 +4,7 @@ import java.util.List;
 import store.product.domain.Product;
 import store.product.domain.ProductGroup;
 import store.product.implement.ProductFinder;
-import store.purchase.domain.PurchaseItemInfo;
+import store.payment.domain.PurchaseItemInfo;
 
 public class ProductService {
     private final ProductFinder productFinder;

@@ -1,8 +1,8 @@
 package store.presentation.controller;
 
 import java.util.List;
-import store.purchase.domain.PurchaseInfo;
-import store.purchase.domain.PurchaseItemInfo;
+import store.payment.domain.PurchaseInfo;
+import store.payment.domain.PurchaseItemInfo;
 
 public class ConvenienceStoreFront implements StoreFront{
 

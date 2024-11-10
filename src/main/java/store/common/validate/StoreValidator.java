@@ -4,7 +4,7 @@ import static store.common.constant.ExceptionMessage.NO_ENOUGH_PRODUCT_MESSAGE;
 
 import java.util.List;
 import store.product.domain.ProductGroup;
-import store.purchase.domain.PurchaseItemInfo;
+import store.payment.domain.PurchaseItemInfo;
 import store.product.implement.ProductFinder;
 
 public class StoreValidator {

@@ -3,7 +3,7 @@ package store.presentation.controller;
 import store.product.domain.Product;
 import store.product.domain.ProductGroup;
 import store.product.service.ProductService;
-import store.purchase.domain.PurchaseItemInfo;
+import store.payment.domain.PurchaseItemInfo;
 
 public class ProductController {
 

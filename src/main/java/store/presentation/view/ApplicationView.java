@@ -1,7 +1,7 @@
 package store.presentation.view;
 
 import java.util.List;
-import store.purchase.domain.PurchaseItemInfo;
+import store.payment.domain.PurchaseItemInfo;
 import store.presentation.dto.ProductAllInfo;
 
 public interface ApplicationView {

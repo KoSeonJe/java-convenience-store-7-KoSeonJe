@@ -9,7 +9,7 @@ import store.product.domain.Product;
 import store.product.service.ProductService;
 import store.promotion.domain.Promotion;
 import store.promotion.service.PromotionService;
-import store.purchase.domain.PurchaseItemInfo;
+import store.payment.domain.PurchaseItemInfo;
 
 public class PromotionController {
 

@@ -1,7 +1,7 @@
 package store.presentation.controller;
 
 import java.util.List;
-import store.purchase.domain.PurchaseItemInfo;
+import store.payment.domain.PurchaseItemInfo;
 
 public interface StoreFront {
 

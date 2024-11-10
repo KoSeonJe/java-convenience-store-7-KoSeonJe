@@ -1,6 +1,6 @@
-package store.purchase.repository;
+package store.payment.repository;
 
-import store.purchase.domain.PurchaseInfo;
+import store.payment.domain.PurchaseInfo;
 
 public interface PurchaseInfoRepository {
 

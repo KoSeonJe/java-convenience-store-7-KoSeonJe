@@ -3,7 +3,7 @@ package store;
 import java.util.List;
 import store.presentation.controller.StoreFront;
 import store.presentation.view.ApplicationView;
-import store.purchase.domain.PurchaseItemInfo;
+import store.payment.domain.PurchaseItemInfo;
 
 public class ConvenicenceStore implements Store {
 
@@ -21,9 +21,4 @@ public class ConvenicenceStore implements Store {
         storeFront.checkPromotion(purchaseItemInfos);
         storeFront.processPayment();
     }
-
-//    private void processPayment() {
-//        PurchaseInfo purchaseInfo = storeService.getRecentPurchaseInfo();
-//        PurchaseHistory purchaseHistory = storeService.processPayment(purchaseInfo);
-//    }
 }

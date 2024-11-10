@@ -5,9 +5,9 @@ import store.presentation.dto.ProductAllInfo;
 import store.presentation.view.ApplicationView;
 import store.product.domain.Product;
 import store.product.service.ProductService;
-import store.purchase.domain.PurchaseInfo;
-import store.purchase.domain.PurchaseItemInfo;
-import store.purchase.service.PurchaseInfoService;
+import store.payment.domain.PurchaseInfo;
+import store.payment.domain.PurchaseItemInfo;
+import store.payment.service.PurchaseInfoService;
 import store.common.validate.StoreValidator;
 
 public class PurchaseController {

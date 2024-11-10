@@ -5,7 +5,7 @@ import static store.common.constant.PromotionConstant.NO_OVER_PROMOTION_QUANTITY
 import store.common.util.NumberUtils;
 import store.product.domain.Product;
 import store.promotion.domain.Promotion;
-import store.purchase.domain.PurchaseItemInfo;
+import store.payment.domain.PurchaseItemInfo;
 import store.promotion.implement.PromotionChecker;
 import store.promotion.implement.PromotionFinder;
 

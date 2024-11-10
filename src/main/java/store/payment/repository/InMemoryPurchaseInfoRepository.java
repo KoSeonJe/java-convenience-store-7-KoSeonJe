@@ -1,8 +1,8 @@
-package store.purchase.repository;
+package store.payment.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import store.purchase.domain.PurchaseInfo;
+import store.payment.domain.PurchaseInfo;
 
 public class InMemoryPurchaseInfoRepository implements PurchaseInfoRepository {
 

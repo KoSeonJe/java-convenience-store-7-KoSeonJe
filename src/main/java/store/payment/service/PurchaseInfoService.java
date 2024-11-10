@@ -1,7 +1,7 @@
-package store.purchase.service;
+package store.payment.service;
 
-import store.purchase.domain.PurchaseInfo;
-import store.purchase.repository.PurchaseInfoRepository;
+import store.payment.domain.PurchaseInfo;
+import store.payment.repository.PurchaseInfoRepository;
 
 public class PurchaseInfoService {
 

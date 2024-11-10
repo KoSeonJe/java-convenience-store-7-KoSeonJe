@@ -1,4 +1,4 @@
-package store.purchase.domain;
+package store.payment.domain;
 
 import store.common.util.StoreUtils;
 
