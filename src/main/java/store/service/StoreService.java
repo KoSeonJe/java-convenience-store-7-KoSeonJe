@@ -4,14 +4,17 @@ import java.util.List;
 import store.domain.Product;
 import store.domain.Promotion;
 import store.domain.PurchaseInfo;
+import store.domain.PurchaseItemInfo;
 
 public interface StoreService {
 
     List<Product> getAllProduct();
 
-    boolean checkAddPromotionQuantity(Promotion promotion, PurchaseInfo purchaseInfo);
+    boolean checkAddPromotionQuantity(Promotion promotion, PurchaseItemInfo purchaseItemInfo);
 
-    Promotion findPromotion(PurchaseInfo purchaseInfo);
+    Promotion findPromotion(PurchaseItemInfo purchaseItemInfo);
 
-    int getQuantityDifference(Promotion promotion, PurchaseInfo purchaseInfo);
+    int getQuantityDifference(Promotion promotion, PurchaseItemInfo purchaseItemInfo);
+
+    void savePurchaseInfo(PurchaseInfo purchaseInfo);
 }

@@ -8,6 +8,7 @@ import store.common.util.StoreUtils;
 import store.domain.Product;
 import store.domain.Promotion;
 import store.domain.PurchaseInfo;
+import store.domain.PurchaseItemInfo;
 import store.presentation.dto.ProductAllInfo;
 import store.presentation.view.ApplicationView;
 import store.service.StoreService;
@@ -27,55 +28,57 @@ public class ConvenicenceStore implements Store {
 
     @Override
     public void open() {
-        List<PurchaseInfo> purchaseInfos = requirePurchaseItem();
-        checkPromotion(purchaseInfos);
+        List<PurchaseItemInfo> purchaseItemInfos = requirePurchaseItem();
+        checkPromotion(purchaseItemInfos);
 
     }
 
-    private void checkPromotion(List<PurchaseInfo> purchaseInfos) {
-        purchaseInfos.forEach(purchaseInfo -> {
-            Promotion promotion = storeService.findPromotion(purchaseInfo);
+    private void checkPromotion(List<PurchaseItemInfo> purchaseItemInfos) {
+        purchaseItemInfos.forEach(purchaseItemInfo -> {
+            Promotion promotion = storeService.findPromotion(purchaseItemInfo);
             if (promotion == null) {
                 return;
             }
-            checkAddPromotionQuantity(promotion, purchaseInfo);
-            checkOverPromotionQuantity(promotion, purchaseInfo);
-            checkMembership(purchaseInfo);
+            checkAddPromotionQuantity(promotion, purchaseItemInfo);
+            checkOverPromotionQuantity(promotion, purchaseItemInfo);
         });
+        boolean isMembership = checkMembership();
+        storeService.savePurchaseInfo(new PurchaseInfo(purchaseItemInfos, isMembership));
     }
 
-    private void checkMembership(PurchaseInfo purchaseInfo) {
+    private boolean checkMembership() {
         String answer = applicationView.confirmApplyMembership();
         if (StoreUtils.isAgree(answer)) {
-            purchaseInfo.applyMembership();
+            return true;
         }
+        return false;
     }
 
-    private void checkAddPromotionQuantity(Promotion promotion, PurchaseInfo purchaseInfo) {
-        if (!storeService.checkAddPromotionQuantity(promotion, purchaseInfo)) {
+    private void checkAddPromotionQuantity(Promotion promotion, PurchaseItemInfo purchaseItemInfo) {
+        if (!storeService.checkAddPromotionQuantity(promotion, purchaseItemInfo)) {
             return;
         }
-        String answer = applicationView.confirmAdditionalItem(purchaseInfo.getName());
+        String answer = applicationView.confirmAdditionalItem(purchaseItemInfo.getName());
         if (StoreUtils.isAgree(answer)) {
-            purchaseInfo.addQuantity();
+            purchaseItemInfo.addQuantity();
         }
     }
 
-    private void checkOverPromotionQuantity(Promotion promotion, PurchaseInfo purchaseInfo) {
-        int quantityDifference = storeService.getQuantityDifference(promotion, purchaseInfo);
+    private void checkOverPromotionQuantity(Promotion promotion, PurchaseItemInfo purchaseItemInfo) {
+        int quantityDifference = storeService.getQuantityDifference(promotion, purchaseItemInfo);
         if (quantityDifference == NO_OVER_PROMOTION_QUANTITY) {
             return;
         }
-        String answer = applicationView.confirmOriginalPrice(purchaseInfo.getName(), quantityDifference);
+        String answer = applicationView.confirmOriginalPrice(purchaseItemInfo.getName(), quantityDifference);
         if (StoreUtils.isAgree(answer)) {
-            purchaseInfo.changePromotion(quantityDifference);
+            purchaseItemInfo.changePromotion(quantityDifference);
             return;
         }
-        purchaseInfo.deleteNoPromotion(quantityDifference);
+        purchaseItemInfo.deleteNoPromotion(quantityDifference);
     }
 
     //TODO: 존재하지 않은 상품 입력한 경우, 구매 수량이 재고 수량을 초과한 경우 예외 처리
-    private List<PurchaseInfo> requirePurchaseItem() {
+    private List<PurchaseItemInfo> requirePurchaseItem() {
         List<Product> products = storeService.getAllProduct();
         applicationView.introduceItem(ProductAllInfo.from(products));
         String inputtedItems = applicationView.inputPurchaseItem();

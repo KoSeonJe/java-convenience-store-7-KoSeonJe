@@ -1,53 +1,14 @@
 package store.domain;
 
+import java.util.List;
+
 public class PurchaseInfo {
 
-    private String name;
-
-    private int originQuantity;
-
-    private int promotionQuantity;
-
+    private List<PurchaseItemInfo> purchaseItemInfos;
     private boolean isMembership;
 
-    public PurchaseInfo(String name, int originQuantity) {
-        this.name = name;
-        this.originQuantity = originQuantity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getOriginQuantity() {
-        return originQuantity;
-    }
-
-    public int getPromotionQuantity() {
-        return promotionQuantity;
-    }
-
-    public boolean isMembership() {
-        return isMembership;
-    }
-
-    public void applyMembership() {
-        this.isMembership = true;
-    }
-
-    public void addQuantity() {
-        originQuantity++;
-    }
-
-    public void deleteNoPromotion(int quantityDifference) {
-        this.originQuantity -= quantityDifference;
-        this.promotionQuantity = this.originQuantity;
-        this.originQuantity = 0;
-    }
-
-    public void changePromotion(int quantityDifference) {
-        this.originQuantity -= quantityDifference;
-        this.promotionQuantity = this.originQuantity;
-        this.originQuantity = quantityDifference;
+    public PurchaseInfo(List<PurchaseItemInfo> purchaseItemInfos, boolean isMembership) {
+        this.purchaseItemInfos = purchaseItemInfos;
+        this.isMembership = isMembership;
     }
 }

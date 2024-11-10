@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import store.domain.Product;
 import store.domain.Promotion;
-import store.domain.PurchaseInfo;
+import store.domain.PurchaseItemInfo;
 
 public class StoreMapper {
 
@@ -47,7 +47,7 @@ public class StoreMapper {
 
     }
 
-    public List<PurchaseInfo> toPurchaseInfo(String rawRequestItems) {
+    public List<PurchaseItemInfo> toPurchaseInfo(String rawRequestItems) {
         List<String> splitItems = List.of(rawRequestItems.split(DATA_SEPARATOR));
         return splitItems.stream()
                 .map(this::createPurchaseInfo)
@@ -74,11 +74,11 @@ public class StoreMapper {
         return Promotion.create(name, buy, get, startDate, endDate);
     }
 
-    private PurchaseInfo createPurchaseInfo(String splitItem) {
+    private PurchaseItemInfo createPurchaseInfo(String splitItem) {
         String content = splitItem.substring(1, splitItem.length() - 1);
         String[] itemInfo = content.split(NAME_QUANTITY_SEPARATOR);
         String name = itemInfo[REQUEST_ITEM_NAME_INDEX];
         int quantity = Integer.parseInt(itemInfo[REQUEST_ITEM_QUANTITY_INDEX]);
-        return new PurchaseInfo(name, quantity);
+        return new PurchaseItemInfo(name, quantity);
     }
 }
