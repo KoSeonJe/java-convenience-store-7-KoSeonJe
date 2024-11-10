@@ -9,6 +9,7 @@ import java.util.List;
 import store.payment.domain.PaymentProduct;
 import store.payment.domain.Receipt;
 import store.payment.dto.CreateReceiptInfo;
+import store.payment.dto.ProductDeductionInfo;
 import store.payment.repository.ReceiptRepository;
 import store.product.domain.Product;
 import store.product.domain.ProductGroup;
@@ -35,7 +36,7 @@ public class ReceiptFactory {
     }
 
     public void create(CreateReceiptInfo receiptInfo) {
-        List<PaymentProduct> paymentProducts = extractPaymentProduct(receiptInfo);
+        List<PaymentProduct> paymentProducts = extractPaymentProduct(receiptInfo.productDeductionInfos());
         int finalAmount = getFinalPrice(paymentProducts);
         int applyPromotionDiscount = getApplyPromotionDiscount(paymentProducts);
         int membershipDiscount = getMembershipDiscount(receiptInfo);
@@ -80,9 +81,9 @@ public class ReceiptFactory {
                 .sum();
     }
 
-    private List<PaymentProduct> extractPaymentProduct(CreateReceiptInfo receiptInfo) {
+    private List<PaymentProduct> extractPaymentProduct(List<ProductDeductionInfo> productDeductionInfos) {
         List<PaymentProduct> paymentProducts = new ArrayList<>();
-        receiptInfo.productDeductionInfos().forEach(productDeductionInfo -> {
+        productDeductionInfos.forEach(productDeductionInfo -> {
             ProductGroup productGroup = productFinder.findAllByName(productDeductionInfo.name());
             String name = productDeductionInfo.name();
             int totalQuantity = productDeductionInfo.getAllQuantity();

@@ -60,15 +60,25 @@ public class OutputConsoleView implements OutputView {
     }
 
     private void printAllDiscount(Receipt receipt) {
-        System.out.printf(RECEIPT_DISCOUNT_FINAL_AMOUNT, receipt.getTotalQuantity(),receipt.finalAmount());
-        System.out.printf(RECEIPT_DISCOUNT_CONTENT, EVENT_DISCOUNT, receipt.applyPromotionDiscount());
-        System.out.printf(RECEIPT_DISCOUNT_CONTENT, MEMBERSHIP_DISCOUNT, receipt.membershipDiscount());
-        System.out.printf(RECEIPT_DISCOUNT_CONTENT, PAYMENT ,receipt.paymentPrice());
+        String fomattedFinalAmount = FOMMATER.format(receipt.finalAmount());
+        System.out.printf(RECEIPT_DISCOUNT_FINAL_AMOUNT, receipt.getTotalQuantity(), fomattedFinalAmount);
+
+        String fomattedApplyPromotionDiscount = FOMMATER.format(-receipt.applyPromotionDiscount());
+        System.out.printf(RECEIPT_DISCOUNT_CONTENT, EVENT_DISCOUNT, fomattedApplyPromotionDiscount);
+
+        String fomattedMembershipDiscount = FOMMATER.format(-receipt.membershipDiscount());
+        System.out.printf(RECEIPT_DISCOUNT_CONTENT, MEMBERSHIP_DISCOUNT, fomattedMembershipDiscount);
+
+        String fomattedPaymentPrice = FOMMATER.format(receipt.paymentPrice());
+        System.out.printf(RECEIPT_DISCOUNT_CONTENT, PAYMENT, fomattedPaymentPrice);
     }
 
     private void printPromotionContent(Receipt receipt) {
         receipt.paymentProducts().forEach(paymentProduct -> {
-            System.out.printf(RECEIPT_PROMOTION_CONTENT, paymentProduct.name(), paymentProduct.applyPromotionQuantity());
+            if (paymentProduct.applyPromotionQuantity() != 0) {
+                System.out.printf(RECEIPT_PROMOTION_CONTENT, paymentProduct.name(),
+                        paymentProduct.applyPromotionQuantity());
+            }
         });
     }
 

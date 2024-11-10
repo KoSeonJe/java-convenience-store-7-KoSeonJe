@@ -16,6 +16,9 @@ public record ProductDeductionInfo(
     }
 
     public int getNonPromotionQuantity(int promotionUnit) {
+        if (promotionUnit == NOT_EXIST_PROMOTION) {
+            return origin;
+        }
         int remainQuantity = promotion % promotionUnit;
         return remainQuantity + origin;
     }
