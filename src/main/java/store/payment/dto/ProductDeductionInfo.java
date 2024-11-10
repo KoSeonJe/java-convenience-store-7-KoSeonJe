@@ -1,5 +1,7 @@
 package store.payment.dto;
 
+import static store.common.constant.PromotionConstant.NOT_EXIST_PROMOTION;
+
 public record ProductDeductionInfo(
         String name,
         int promotion,
@@ -7,6 +9,9 @@ public record ProductDeductionInfo(
 ) {
 
     public int getPromotionQuantity(int promotionUnit) {
+        if (promotionUnit == NOT_EXIST_PROMOTION) {
+            return 0;
+        }
         return promotion / promotionUnit;
     }
 

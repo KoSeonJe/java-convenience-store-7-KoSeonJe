@@ -20,5 +20,6 @@ public class ConvenicenceStore implements Store {
         List<PurchaseItemInfo> purchaseItemInfos = storeFront.requirePurchaseItem();
         storeFront.checkPromotion(purchaseItemInfos);
         storeFront.processPayment();
+        storeFront.printReceipt();
     }
 }

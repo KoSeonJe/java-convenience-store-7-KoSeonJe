@@ -9,4 +9,10 @@ public record Receipt(
         int membershipDiscount,
         int paymentPrice
 ) {
+
+    public int getTotalQuantity() {
+        return paymentProducts.stream()
+                .mapToInt(PaymentProduct::quantity)
+                .sum();
+    }
 }

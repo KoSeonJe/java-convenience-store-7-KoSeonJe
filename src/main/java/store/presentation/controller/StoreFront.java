@@ -10,4 +10,6 @@ public interface StoreFront {
     void checkPromotion(List<PurchaseItemInfo> purchaseItems);
 
     void processPayment();
+
+    void printReceipt();
 }

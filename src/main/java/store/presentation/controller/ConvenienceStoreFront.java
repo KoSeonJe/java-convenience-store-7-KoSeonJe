@@ -34,4 +34,9 @@ public class ConvenienceStoreFront implements StoreFront{
     public void processPayment() {
         paymentController.processPayment();
     }
+
+    @Override
+    public void printReceipt() {
+        paymentController.printReceipt();
+    }
 }

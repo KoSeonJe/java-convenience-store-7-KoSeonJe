@@ -8,6 +8,7 @@ import store.infra.file.DataInitializer;
 import store.infra.file.FileDataInitializer;
 import store.infra.file.FileLoader;
 import store.payment.implement.ReceiptFactory;
+import store.payment.implement.ReceiptFinder;
 import store.payment.repository.InMemoryPurchaseInfoRepository;
 import store.payment.repository.PurchaseInfoRepository;
 import store.payment.repository.ReceiptRepository;
@@ -87,11 +88,15 @@ public final class StoreConfig {
     }
 
     private PaymentController paymentController() {
-        return new PaymentController(purchaseInfoService(), paymentService());
+        return new PaymentController(purchaseInfoService(), paymentService(), applicationView());
     }
 
     private PaymentService paymentService() {
-        return new PaymentService(productService(), receiptFactory());
+        return new PaymentService(productService(), receiptFactory(), receiptFinder());
+    }
+
+    private ReceiptFinder receiptFinder() {
+        return new ReceiptFinder(receiptRepository());
     }
 
     private ProductService productService() {

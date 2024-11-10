@@ -3,6 +3,7 @@ package store.presentation.view.console;
 import java.util.List;
 import store.common.support.StoreMapper;
 import store.payment.domain.PurchaseItemInfo;
+import store.payment.domain.Receipt;
 import store.presentation.dto.ProductAllInfo;
 import store.presentation.view.ApplicationView;
 import store.presentation.view.InputView;
@@ -45,5 +46,10 @@ public class ApplicationConsoleView implements ApplicationView {
     @Override
     public String confirmApplyMembership() {
         return inputView.confirmApplyMembership();
+    }
+
+    @Override
+    public void printReceipt(Receipt receipt) {
+        outputView.printReceipt(receipt);
     }
 }

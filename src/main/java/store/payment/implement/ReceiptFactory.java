@@ -1,5 +1,7 @@
 package store.payment.implement;
 
+import static store.common.constant.PromotionConstant.NOT_EXIST_PROMOTION;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -93,6 +95,9 @@ public class ReceiptFactory {
 
     private int getPromotionUnit(ProductGroup productGroup) {
         Product promotionProduct = productGroup.findPromotionProduct();
+        if (promotionProduct == null) {
+            return NOT_EXIST_PROMOTION;
+        }
         Promotion promotion = promotionFinder.findByName(promotionProduct.getPromotionName());
         return promotion.getBuy() + promotion.getGet();
     }

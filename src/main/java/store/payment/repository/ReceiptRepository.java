@@ -21,4 +21,8 @@ public class ReceiptRepository {
     public void save(Receipt receipt) {
         repository.add(receipt);
     }
+
+    public Receipt getRecent() {
+        return repository.getLast();
+    }
 }

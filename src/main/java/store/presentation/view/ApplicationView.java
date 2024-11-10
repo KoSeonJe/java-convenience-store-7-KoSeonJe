@@ -2,6 +2,7 @@ package store.presentation.view;
 
 import java.util.List;
 import store.payment.domain.PurchaseItemInfo;
+import store.payment.domain.Receipt;
 import store.presentation.dto.ProductAllInfo;
 
 public interface ApplicationView {
@@ -15,4 +16,6 @@ public interface ApplicationView {
     String confirmOriginalPrice(String name, int quantityDifference);
 
     String confirmApplyMembership();
+
+    void printReceipt(Receipt receipt);
 }
