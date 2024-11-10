@@ -40,4 +40,9 @@ public class ProductGroup {
                 .sum();
         return NumberUtils.isNotNegative(totalQuantity - quantity);
     }
+
+    public int getProductPrice() {
+        Product product = products.stream().findFirst().get();
+        return product.getPrice().intValue();
+    }
 }

@@ -6,4 +6,11 @@ public record ProductDeductionInfo(
         int origin
 ) {
 
+    public int getPromotionQuantity(int promotionUnit) {
+        return promotion / promotionUnit;
+    }
+
+    public int getAllQuantity() {
+        return origin + promotion;
+    }
 }
