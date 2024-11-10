@@ -7,6 +7,7 @@ import java.util.List;
 import store.payment.domain.PaymentProduct;
 import store.payment.domain.Receipt;
 import store.payment.dto.CreateReceiptInfo;
+import store.payment.repository.ReceiptRepository;
 import store.product.domain.Product;
 import store.product.domain.ProductGroup;
 import store.product.implement.ProductFinder;
@@ -22,19 +23,23 @@ public class ReceiptFactory {
 
     private final ProductFinder productFinder;
     private final PromotionFinder promotionFinder;
+    private final ReceiptRepository receiptRepository;
 
-    public ReceiptFactory(ProductFinder productFinder, PromotionFinder promotionFinder) {
+    public ReceiptFactory(ProductFinder productFinder, PromotionFinder promotionFinder,
+            ReceiptRepository receiptRepository) {
         this.productFinder = productFinder;
         this.promotionFinder = promotionFinder;
+        this.receiptRepository = receiptRepository;
     }
 
-    public Receipt create(CreateReceiptInfo receiptInfo) {
+    public void create(CreateReceiptInfo receiptInfo) {
         List<PaymentProduct> paymentProducts = extractPaymentProduct(receiptInfo);
         int finalAmount = getFinalPrice(paymentProducts);
         int applyPromotionDiscount = getApplyPromotionDiscount(paymentProducts);
         int membershipDiscount = getMembershipDiscount(receiptInfo);
         int paymentPrice = finalAmount - applyPromotionDiscount - membershipDiscount;
-        return new Receipt(paymentProducts, finalAmount, applyPromotionDiscount, membershipDiscount, paymentPrice);
+        Receipt receipt = new Receipt(paymentProducts, finalAmount, applyPromotionDiscount, membershipDiscount, paymentPrice);
+        receiptRepository.save(receipt);
     }
 
     private int getMembershipDiscount(CreateReceiptInfo receiptInfo) {

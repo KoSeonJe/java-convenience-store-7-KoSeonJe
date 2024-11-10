@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import store.payment.domain.PurchaseInfo;
 import store.payment.domain.PurchaseItemInfo;
-import store.payment.domain.Receipt;
 import store.payment.dto.CreateReceiptInfo;
 import store.payment.dto.ProductDeductionInfo;
 import store.payment.implement.ReceiptFactory;
@@ -30,13 +29,9 @@ public class PaymentService {
         return productDeductionInfos;
     }
 
-    public Receipt createReceipt(CreateReceiptInfo receiptInfo) {
-        return receiptFactory.create(receiptInfo);
+    public void createReceipt(CreateReceiptInfo receiptInfo) {
+        receiptFactory.create(receiptInfo);
     }
-
-    public void save(Receipt receipt) {
-    }
-
 
     private ProductDeductionInfo deductProduct(PurchaseItemInfo purchaseItemInfo) {
         ProductGroup productGroup = productService.findAllByName(purchaseItemInfo.getName());

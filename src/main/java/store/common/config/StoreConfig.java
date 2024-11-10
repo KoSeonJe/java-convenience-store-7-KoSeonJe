@@ -7,8 +7,10 @@ import store.common.validate.StoreValidator;
 import store.infra.file.DataInitializer;
 import store.infra.file.FileDataInitializer;
 import store.infra.file.FileLoader;
+import store.payment.implement.ReceiptFactory;
 import store.payment.repository.InMemoryPurchaseInfoRepository;
 import store.payment.repository.PurchaseInfoRepository;
+import store.payment.repository.ReceiptRepository;
 import store.payment.service.PaymentService;
 import store.payment.service.PurchaseInfoService;
 import store.presentation.controller.ConvenienceStoreFront;
@@ -89,7 +91,7 @@ public final class StoreConfig {
     }
 
     private PaymentService paymentService() {
-        return new PaymentService(productService());
+        return new PaymentService(productService(), receiptFactory());
     }
 
     private ProductService productService() {
@@ -118,5 +120,13 @@ public final class StoreConfig {
 
     private StoreValidator storeValidator() {
         return new StoreValidator(productFinder());
+    }
+
+    private ReceiptFactory receiptFactory() {
+        return new ReceiptFactory(productFinder(), promotionFinder(), receiptRepository());
+    }
+
+    private ReceiptRepository receiptRepository() {
+        return ReceiptRepository.getInstance();
     }
 }
