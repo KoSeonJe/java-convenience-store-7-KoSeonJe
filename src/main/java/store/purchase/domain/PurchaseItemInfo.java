@@ -1,5 +1,7 @@
 package store.purchase.domain;
 
+import store.common.util.StoreUtils;
+
 public class PurchaseItemInfo {
 
     private String name;
@@ -35,14 +37,21 @@ public class PurchaseItemInfo {
         allQuantity++;
     }
 
-    public void deleteNoPromotion(int quantityDifference) {
-        this.allQuantity -= quantityDifference;
-        this.originQuantity = 0;
+    public void updateOriginQuantity() {
+        this.originQuantity = allQuantity;
+    }
+
+    public void updatePromotionQuantity() {
         this.promotionQuantity = allQuantity;
     }
 
-    public void updateQuantity(int quantityDifference) {
-        this.originQuantity = quantityDifference;
-        this.promotionQuantity = allQuantity - quantityDifference;
+    public void updateQuantityByAnswer(String answer, int quantityDifference) {
+        if (StoreUtils.isAgree(answer)) {
+            this.originQuantity = quantityDifference;
+            this.promotionQuantity = allQuantity - quantityDifference;
+            return;
+        }
+        this.allQuantity -= quantityDifference;
+        this.promotionQuantity = allQuantity;
     }
 }
