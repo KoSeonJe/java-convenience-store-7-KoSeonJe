@@ -37,7 +37,7 @@ public class ConvenienceStoreService implements StoreService {
         if (promotionProduct.getQuantity() == purchaseItemInfo.getOriginQuantity()) {
             return false;
         }
-        return promotionManager.shouldAddProduct(promotion, purchaseItemInfo.getOriginQuantity());
+        return promotionManager.checkAddProduct(promotion, purchaseItemInfo.getOriginQuantity());
     }
 
     @Override
@@ -54,13 +54,11 @@ public class ConvenienceStoreService implements StoreService {
     public int getQuantityDifference(Promotion promotion, PurchaseItemInfo purchaseItemInfo) {
         ProductGroup productGroup = productManager.findAllByName(purchaseItemInfo.getName());
         Product promotionProduct = productGroup.findpromotionProduct();
-        int difference = promotionProduct.getQuantity() - purchaseItemInfo.getOriginQuantity();
-        if (NumberUtils.isPositive(difference)) {
+        int nonDiscountedQuantity = promotionManager.getNonDiscountedQuantity(promotionProduct, purchaseItemInfo);
+        if (!NumberUtils.isPositive(nonDiscountedQuantity)) {
             return NO_OVER_PROMOTION_QUANTITY;
         }
-        int promotionUnit = promotion.getGet() + promotion.getBuy();
-        int promotionTarget = promotionProduct.getQuantity() - (promotionProduct.getQuantity() % promotionUnit);
-        return purchaseItemInfo.getOriginQuantity() - promotionTarget;
+        return nonDiscountedQuantity;
     }
 
     @Override
