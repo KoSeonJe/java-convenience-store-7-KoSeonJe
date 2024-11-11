@@ -89,6 +89,9 @@ public class OutputConsoleView implements OutputView {
 
     private void printProductContent(Receipt receipt) {
         receipt.paymentProducts().forEach(paymentProduct -> {
+            if (paymentProduct.quantity() == 0) {
+                return;
+            }
             String fomattedPrice = FOMMATER.format(paymentProduct.totalPrice());
             System.out.printf(RECEIPT_PRODUCT_CONTENT, paymentProduct.name(), paymentProduct.quantity(), fomattedPrice);
         });

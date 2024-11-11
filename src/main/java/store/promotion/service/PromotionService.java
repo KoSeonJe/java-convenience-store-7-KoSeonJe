@@ -25,7 +25,7 @@ public class PromotionService {
     }
 
     public boolean checkAddPromotionQuantity(Product promotionProduct, PurchaseItemInfo purchaseItemInfo) {
-        if (promotionProduct.getQuantity() == purchaseItemInfo.getQuantity()) {
+        if (promotionProduct.getQuantity() <= purchaseItemInfo.getQuantity()) {
             return false;
         }
         Promotion promotion = promotionFinder.findByName(promotionProduct.getPromotionName());

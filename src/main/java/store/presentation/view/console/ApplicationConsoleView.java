@@ -40,8 +40,8 @@ public class ApplicationConsoleView implements ApplicationView {
             try {
                 String inputtedItems = inputView.requireInputItem();
                 List<PurchaseItemInfo> purchaseItemInfos = storeMapper.toPurchaseInfo(inputtedItems);
-                storeValidator.enoughQuantity(purchaseItemInfos);
                 storeValidator.existProduct(purchaseItemInfos);
+                storeValidator.enoughQuantity(purchaseItemInfos);
                 return purchaseItemInfos;
             } catch (CustomException e) {
                 outputView.printError(e.getMessage());
