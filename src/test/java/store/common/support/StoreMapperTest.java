@@ -16,7 +16,7 @@ class StoreMapperTest {
 
     private StoreMapper storeMapper = StoreFixture.storeMapper();
 
-    @DisplayName("파일 형식이 지켜지고 문자열로 된 Product 리스트를 객체로 변환한다.")
+    @DisplayName("파일 형식이 지켜지고 문자열로 추출 된 Product 리스트를 객체로 변환한다.")
     @Test
     void toProducts() {
         assertSimpleTest(() -> {
@@ -29,6 +29,7 @@ class StoreMapperTest {
         });
     }
 
+    @DisplayName("파일 형식이 지켜지고 문자열로 추출 된 Promotion 리스트를 객체로 변환한다.")
     @Test
     void toPromotions() {
         assertSimpleTest(() -> {
@@ -41,6 +42,7 @@ class StoreMapperTest {
         });
     }
 
+    @DisplayName("형식에 따라 입력한 구매 정보를 객체로 변환")
     @Test
     void toPurchaseInfo() {
         assertSimpleTest(() -> {
