@@ -15,7 +15,6 @@ public class FileDataInitializer implements DataInitializer {
     private final ProductRepository productRepository;
     private final PromotionRepository promotionRepository;
 
-
     public FileDataInitializer(FileLoader fileloader, StoreMapper storeMapper, ProductRepository productRepository,
             PromotionRepository promotionRepository) {
         this.fileloader = fileloader;
@@ -26,6 +25,8 @@ public class FileDataInitializer implements DataInitializer {
 
     @Override
     public void init() {
+        productRepository.clear();
+        promotionRepository.clear();
         List<String> rawProducts = fileloader.loadFile(PRODUCTS_FILE_NAME);
         List<String> rawPromotions = fileloader.loadFile(PROMOTIONS_FILE_NAME);
         productRepository.saveAll(storeMapper.toProducts(rawProducts));

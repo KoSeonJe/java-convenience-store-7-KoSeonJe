@@ -3,11 +3,7 @@ package store;
 import java.util.List;
 import store.common.support.Answer;
 import store.payment.domain.PurchaseItemInfo;
-import store.payment.repository.InMemoryPurchaseInfoRepository;
-import store.payment.repository.ReceiptRepository;
 import store.presentation.controller.StoreFront;
-import store.product.repository.InMemoryProductRepository;
-import store.promotion.repository.InMemoryPromotionRepository;
 
 public class ConvenicenceStore implements Store {
 
@@ -27,13 +23,5 @@ public class ConvenicenceStore implements Store {
             storeFront.printReceipt();
             answer = storeFront.askContinue();
         } while (Answer.isAgree(answer));
-    }
-
-    @Override
-    public void clear() {
-        InMemoryPurchaseInfoRepository.getInstance().clear();
-        ReceiptRepository.getInstance().clear();
-        InMemoryProductRepository.getInstance().clear();
-        InMemoryPromotionRepository.getInstance().clear();
     }
 }

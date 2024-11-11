@@ -8,6 +8,5 @@ public class Application {
         storeConfig.dataInitializer().init();
         Store store = storeConfig.store();
         store.sell();
-        store.clear();
     }
 }

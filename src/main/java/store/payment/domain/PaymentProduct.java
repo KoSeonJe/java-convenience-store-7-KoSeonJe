@@ -1,5 +1,7 @@
 package store.payment.domain;
 
+import static store.common.constant.PromotionConstant.NOT_EXIST_PROMOTION;
+
 public record PaymentProduct(
         String name,
         int quantity,
@@ -8,6 +10,9 @@ public record PaymentProduct(
 ) {
 
     public int getApplyPromotionPrice() {
+        if (applyPromotionQuantity == NOT_EXIST_PROMOTION) {
+            return NOT_EXIST_PROMOTION;
+        }
         int price = totalPrice / quantity;
         return price * applyPromotionQuantity;
     }
