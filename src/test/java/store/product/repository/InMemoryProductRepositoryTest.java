@@ -1,4 +1,4 @@
-package store;
+package store.product.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import store.product.domain.Product;
 import store.product.domain.ProductGroup;
-import store.product.repository.InMemoryProductRepository;
 
 class InMemoryProductRepositoryTest {
 

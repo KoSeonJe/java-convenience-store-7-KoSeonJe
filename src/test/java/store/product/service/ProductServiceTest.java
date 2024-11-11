@@ -2,6 +2,7 @@ package store.product.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import camp.nextstep.edu.missionutils.test.Assertions;
 import fixture.StoreFixture;
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,5 +37,35 @@ class ProductServiceTest {
         assertThat(product).isNotNull();
         assertThat(product.getName()).isEqualTo("콜라");
         assertThat(product.getPromotionName()).isEqualTo("탄산2+1");
+    }
+
+    @DisplayName("프로모션 제품에서 주어진 양만큼 차감한다.")
+    @Test
+    void noRemainDeductPromotion() {
+        Assertions.assertSimpleTest(() -> {
+            Product product = Product.create("콜라", new BigDecimal(1000), 10, "탄산2+1");
+            productService.deductPromotion(product, 8);
+            assertThat(product.getQuantity()).isEqualTo(2);
+        });
+    }
+
+    @DisplayName("주어진 양이 프로모션 제품보다 초과되면 모두 차감하고 남는 양을 반환한다.")
+    @Test
+    void deductPromotion() {
+        Assertions.assertSimpleTest(() -> {
+            Product product = Product.create("콜라", new BigDecimal(1000), 10, "탄산2+1");
+            int remain = productService.deductPromotion(product, 13);
+            assertThat(remain).isEqualTo(3);
+        });
+    }
+
+    @DisplayName("일반 제품에서 주어진 양만큼 차감한다.")
+    @Test
+    void deductOrigin() {
+        Assertions.assertSimpleTest(() -> {
+            Product product = Product.create("콜라", new BigDecimal(1000), 10, "탄산2+1");
+            productService.deductOrigin(product, 5);
+            assertThat(product.getQuantity()).isEqualTo(5);
+        });
     }
 }

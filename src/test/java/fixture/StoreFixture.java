@@ -34,7 +34,7 @@ public class StoreFixture {
         return new PromotionService(promotionFinder(), new PromotionChecker());
     }
 
-    private static PromotionFinder promotionFinder() {
+    public static PromotionFinder promotionFinder() {
         return new PromotionFinder(promotionRepository());
     }
 
