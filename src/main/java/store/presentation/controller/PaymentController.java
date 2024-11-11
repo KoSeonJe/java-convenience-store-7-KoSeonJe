@@ -25,8 +25,7 @@ public class PaymentController {
     public void processPayment() {
         PurchaseInfo purchaseInfo = purchaseInfoService.getRecent();
         List<ProductDeductionInfo> productDeductionInfos = paymentService.process(purchaseInfo);
-        CreateReceiptInfo createReceiptInfo = new CreateReceiptInfo(productDeductionInfos, purchaseInfo.isMembership());
-        paymentService.createReceipt(createReceiptInfo);
+        paymentService.createReceipt(new CreateReceiptInfo(productDeductionInfos, purchaseInfo.isMembership()));
     }
 
     public void printReceipt() {

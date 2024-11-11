@@ -2,6 +2,7 @@ package store.payment.implement;
 
 import static store.common.constant.PromotionConstant.NOT_EXIST_PROMOTION;
 
+import camp.nextstep.edu.missionutils.DateTimes;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -100,6 +101,9 @@ public class ReceiptFactory {
             return NOT_EXIST_PROMOTION;
         }
         Promotion promotion = promotionFinder.findByName(promotionProduct.getPromotionName());
+        if (!promotion.isActive(DateTimes.now())) {
+            return NOT_EXIST_PROMOTION;
+        }
         return promotion.getBuy() + promotion.getGet();
     }
 }

@@ -27,4 +27,9 @@ public class InMemoryPurchaseInfoRepository implements PurchaseInfoRepository {
     public PurchaseInfo getRecent() {
         return repository.getLast();
     }
+
+    @Override
+    public void clear() {
+        repository.clear();
+    }
 }

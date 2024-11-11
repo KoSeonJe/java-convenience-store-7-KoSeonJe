@@ -1,6 +1,7 @@
 package store.promotion.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 public class Promotion {
@@ -35,15 +36,12 @@ public class Promotion {
         return get;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
     public static Promotion create(String name, int buy, int get, LocalDate startDate, LocalDate endDate) {
         return new Promotion(name, buy, get, startDate, endDate);
+    }
+
+    public boolean isActive(LocalDateTime now) {
+        LocalDate nowDate = LocalDate.from(now);
+        return !startDate.isBefore(nowDate) && !endDate.isAfter(nowDate);
     }
 }

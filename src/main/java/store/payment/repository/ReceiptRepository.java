@@ -25,4 +25,8 @@ public class ReceiptRepository {
     public Receipt getRecent() {
         return repository.getLast();
     }
+
+    public void clear() {
+        repository.clear();
+    }
 }

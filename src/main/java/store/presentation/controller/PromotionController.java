@@ -2,6 +2,7 @@ package store.presentation.controller;
 
 import static store.common.constant.PromotionConstant.NO_OVER_PROMOTION_QUANTITY;
 
+import camp.nextstep.edu.missionutils.DateTimes;
 import java.util.List;
 import store.common.support.Answer;
 import store.payment.domain.PurchaseItemInfo;
@@ -24,22 +25,13 @@ public class PromotionController {
         this.productService = productService;
     }
 
-    public void checkAllAddPromotionQuantity(List<PurchaseItemInfo> purchaseItemInfos) {
+    public void checkPromotionQuantity(List<PurchaseItemInfo> purchaseItemInfos) {
         purchaseItemInfos.forEach(purchaseItemInfo -> {
             Product promotionProduct = productService.findPromotionProduct(purchaseItemInfo);
-            if (promotionProduct == null) {
+            if (promotionProduct == null || !promotionService.isDiscountActive(promotionProduct, DateTimes.now())) {
                 return;
             }
             checkAddPromotionQuantity(promotionProduct, purchaseItemInfo);
-        });
-    }
-
-    public void checkAllOverPromotionQuantity(List<PurchaseItemInfo> purchaseItemInfos) {
-        purchaseItemInfos.forEach(purchaseItemInfo -> {
-            Product promotionProduct = productService.findPromotionProduct(purchaseItemInfo);
-            if (promotionProduct == null) {
-                return;
-            }
             checkOverPromotionQuantity(promotionProduct, purchaseItemInfo);
         });
     }

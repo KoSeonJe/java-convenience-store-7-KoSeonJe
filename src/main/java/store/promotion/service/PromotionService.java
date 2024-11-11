@@ -2,10 +2,11 @@ package store.promotion.service;
 
 import static store.common.constant.PromotionConstant.NO_OVER_PROMOTION_QUANTITY;
 
+import java.time.LocalDateTime;
 import store.common.util.NumberUtils;
+import store.payment.domain.PurchaseItemInfo;
 import store.product.domain.Product;
 import store.promotion.domain.Promotion;
-import store.payment.domain.PurchaseItemInfo;
 import store.promotion.implement.PromotionChecker;
 import store.promotion.implement.PromotionFinder;
 
@@ -37,5 +38,10 @@ public class PromotionService {
             return NO_OVER_PROMOTION_QUANTITY;
         }
         return Math.abs(nonDiscountedQuantity);
+    }
+
+    public boolean isDiscountActive(Product promotionProduct, LocalDateTime now) {
+        Promotion promotion = promotionFinder.findByName(promotionProduct.getPromotionName());
+        return promotion.isActive(now);
     }
 }
