@@ -1,6 +1,6 @@
 package store.payment.domain;
 
-import store.common.util.StoreUtils;
+import store.common.support.Answer;
 
 public class PurchaseItemInfo {
 
@@ -26,7 +26,7 @@ public class PurchaseItemInfo {
     }
 
     public void updateQuantityByAnswer(String answer, int quantityDifference) {
-        if (StoreUtils.isAgree(answer)) {
+        if (Answer.isAgree(answer)) {
             return;
         }
         quantity = quantity - quantityDifference;

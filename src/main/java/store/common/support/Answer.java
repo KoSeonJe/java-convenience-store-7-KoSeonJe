@@ -1,9 +1,8 @@
 package store.common.support;
 
-import static store.common.constant.ExceptionMessage.INCORRECT_FORMAT_MESSAGE;
-
 import java.util.Arrays;
 import java.util.Objects;
+import store.common.exception.AnswerFormatException;
 
 public enum Answer {
     Y,N;
@@ -17,8 +16,7 @@ public enum Answer {
                 .anyMatch(answer -> Objects.equals(inputAnswer, answer.name()));
 
         if (!correct) {
-            throw new IllegalArgumentException(INCORRECT_FORMAT_MESSAGE);
+            throw new AnswerFormatException();
         }
-
     }
 }

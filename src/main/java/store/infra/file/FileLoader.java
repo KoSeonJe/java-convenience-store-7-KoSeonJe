@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import store.common.exception.FileloadException;
+import store.common.exception.FileLoadException;
 
 public class FileLoader {
 
@@ -16,7 +16,7 @@ public class FileLoader {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(getFilePath(fileName)))) {
             fileData = br.lines().collect(Collectors.toList());
         } catch (IOException e) {
-            throw new FileloadException("File 데이터를 불러오는 데 실패하였습니다.");
+            throw new FileLoadException();
         };
         fileData.removeFirst();
         return fileData;

@@ -3,13 +3,13 @@ package store.presentation.controller;
 import static store.common.constant.PromotionConstant.NO_OVER_PROMOTION_QUANTITY;
 
 import java.util.List;
-import store.common.util.StoreUtils;
+import store.common.support.Answer;
+import store.payment.domain.PurchaseItemInfo;
 import store.presentation.view.ApplicationView;
 import store.product.domain.Product;
 import store.product.service.ProductService;
 import store.promotion.domain.Promotion;
 import store.promotion.service.PromotionService;
-import store.payment.domain.PurchaseItemInfo;
 
 public class PromotionController {
 
@@ -46,7 +46,7 @@ public class PromotionController {
 
     public boolean checkMembership() {
         String answer = applicationView.confirmApplyMembership();
-        return StoreUtils.isAgree(answer);
+        return Answer.isAgree(answer);
     }
 
     private void checkAddPromotionQuantity(Product promotionProduct, PurchaseItemInfo purchaseItemInfo) {
@@ -55,7 +55,7 @@ public class PromotionController {
         }
         Promotion promotion = promotionService.findByName(promotionProduct.getPromotionName());
         String answer = applicationView.confirmAdditionalItem(purchaseItemInfo.getName(), promotion.getGet());
-        if (StoreUtils.isAgree(answer)) {
+        if (Answer.isAgree(answer)) {
             purchaseItemInfo.addAllQuantity(promotion.getGet());
         }
     }
