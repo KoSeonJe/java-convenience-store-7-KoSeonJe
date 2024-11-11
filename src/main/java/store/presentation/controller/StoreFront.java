@@ -12,4 +12,6 @@ public interface StoreFront {
     void processPayment();
 
     void printReceipt();
+
+    String askContinue();
 }

@@ -9,4 +9,6 @@ public interface InputView {
     String confirmOriginalPrice(String name, int quantityDifference);
 
     String confirmApplyMembership();
+
+    String askContinue();
 }

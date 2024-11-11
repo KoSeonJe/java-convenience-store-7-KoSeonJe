@@ -18,4 +18,6 @@ public interface ApplicationView {
     String confirmApplyMembership();
 
     void printReceipt(Receipt receipt);
+
+    String askContinue();
 }

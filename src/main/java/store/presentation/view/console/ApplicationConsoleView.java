@@ -52,4 +52,9 @@ public class ApplicationConsoleView implements ApplicationView {
     public void printReceipt(Receipt receipt) {
         outputView.printReceipt(receipt);
     }
+
+    @Override
+    public String askContinue() {
+        return inputView.askContinue();
+    }
 }

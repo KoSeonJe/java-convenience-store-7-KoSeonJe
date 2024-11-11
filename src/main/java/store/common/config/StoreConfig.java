@@ -52,7 +52,7 @@ public final class StoreConfig {
     }
 
     public Store store() {
-        return new ConvenicenceStore(applicationView(), storeService());
+        return new ConvenicenceStore(storeFront());
     }
 
     private ApplicationView applicationView() {
@@ -75,8 +75,8 @@ public final class StoreConfig {
         return InMemoryPromotionRepository.getInstance();
     }
 
-    private StoreFront storeService() {
-        return new ConvenienceStoreFront(promotionController(), purchaseController(), paymentController());
+    private StoreFront storeFront() {
+        return new ConvenienceStoreFront(promotionController(), purchaseController(), paymentController(), applicationView());
     }
 
     private PromotionController promotionController() {

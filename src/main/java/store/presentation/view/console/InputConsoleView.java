@@ -9,6 +9,7 @@ public class InputConsoleView implements InputView {
     private static final String CONFIRM_ADDITIONAL_ITEM_MESSAGE = "\n현재 %s은(는) %d개를 무료로 더 받을 수 있습니다. 추가하시겠습니까? (Y/N)\n";
     private static final String CONFIRM_PURCHASE_ORIGINAL_PRICE_MESSAGE = "\n현재 %s %d개는 프로모션 할인이 적용되지 않습니다. 그래도 구매하시겠습니까? (Y/N)\n";
     private static final String CONFIRM_APPLY_MEMBERSHIP_MESSAGE = "\n멤버십 할인을 받으시겠습니까? (Y/N)";
+    private static final String ASK_CONTINUE_PURCHASE = "\n감사합니다. 구매하고 싶은 다른 상품이 있나요? (Y/N)";
 
     @Override
     public String requireInputItem() {
@@ -31,6 +32,12 @@ public class InputConsoleView implements InputView {
     @Override
     public String confirmApplyMembership() {
         println(CONFIRM_APPLY_MEMBERSHIP_MESSAGE);
+        return Console.readLine();
+    }
+
+    @Override
+    public String askContinue() {
+        println(ASK_CONTINUE_PURCHASE);
         return Console.readLine();
     }
 
