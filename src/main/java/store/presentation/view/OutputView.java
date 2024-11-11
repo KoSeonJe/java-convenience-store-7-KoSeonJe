@@ -10,4 +10,6 @@ public interface OutputView {
     void printInventory(ProductAllInfo response);
 
     void printReceipt(Receipt receipt);
+
+    void printError(String message);
 }

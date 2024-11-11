@@ -1,6 +1,7 @@
 package store.common.validate;
 
 import static store.common.constant.ExceptionMessage.NO_ENOUGH_PRODUCT_MESSAGE;
+import static store.common.constant.ExceptionMessage.NO_EXIST_PRODUCT_MESSAGE;
 
 import java.util.List;
 import store.product.domain.ProductGroup;
@@ -30,7 +31,7 @@ public class StoreValidator {
             String name = purchaseItemInfo.getName();
             ProductGroup productGroup = productFinder.findAllByName(name);
             if(productGroup == null) {
-                throw new IllegalArgumentException(NO_ENOUGH_PRODUCT_MESSAGE);
+                throw new IllegalArgumentException(NO_EXIST_PRODUCT_MESSAGE);
             }
         });
     }

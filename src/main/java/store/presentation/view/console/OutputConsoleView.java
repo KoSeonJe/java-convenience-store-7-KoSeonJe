@@ -59,6 +59,11 @@ public class OutputConsoleView implements OutputView {
         printAllDiscount(receipt);
     }
 
+    @Override
+    public void printError(String message) {
+        println(message);
+    }
+
     private void printAllDiscount(Receipt receipt) {
         String fomattedFinalAmount = FOMMATER.format(receipt.finalAmount());
         System.out.printf(RECEIPT_DISCOUNT_FINAL_AMOUNT, receipt.getTotalQuantity(), fomattedFinalAmount);

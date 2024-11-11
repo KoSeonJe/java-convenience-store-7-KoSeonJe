@@ -1,6 +1,7 @@
 package store.presentation.view.console;
 
 import java.util.List;
+import store.common.support.Answer;
 import store.common.support.StoreMapper;
 import store.payment.domain.PurchaseItemInfo;
 import store.payment.domain.Receipt;
@@ -35,17 +36,41 @@ public class ApplicationConsoleView implements ApplicationView {
 
     @Override
     public String confirmAdditionalItem(String name, int getCount) {
-        return inputView.confirmAdditionalItem(name, getCount);
+        while (true) {
+            try {
+                String inputAnswer = inputView.confirmAdditionalItem(name, getCount);
+                Answer.validateFormat(inputAnswer);
+                return inputAnswer;
+            } catch (IllegalArgumentException e) {
+                outputView.printError(e.getMessage());
+            }
+        }
     }
 
     @Override
     public String confirmOriginalPrice(String name, int quantityDifference) {
-        return inputView.confirmOriginalPrice(name, quantityDifference);
+        while (true) {
+            try {
+                String inputAnswer = inputView.confirmOriginalPrice(name, quantityDifference);
+                Answer.validateFormat(inputAnswer);
+                return inputAnswer;
+            } catch (IllegalArgumentException e) {
+                outputView.printError(e.getMessage());
+            }
+        }
     }
 
     @Override
     public String confirmApplyMembership() {
-        return inputView.confirmApplyMembership();
+        while (true) {
+            try {
+                String inputAnswer = inputView.confirmApplyMembership();
+                Answer.validateFormat(inputAnswer);
+                return inputAnswer;
+            } catch (IllegalArgumentException e) {
+                outputView.printError(e.getMessage());
+            }
+        }
     }
 
     @Override
@@ -55,6 +80,14 @@ public class ApplicationConsoleView implements ApplicationView {
 
     @Override
     public String askContinue() {
-        return inputView.askContinue();
+        while (true) {
+            try {
+                String inputAnswer = inputView.askContinue();
+                Answer.validateFormat(inputAnswer);
+                return inputAnswer;
+            } catch (IllegalArgumentException e) {
+                outputView.printError(e.getMessage());
+            }
+        }
     }
 }

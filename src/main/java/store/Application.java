@@ -7,6 +7,6 @@ public class Application {
         StoreConfig storeConfig = StoreConfig.getInstance();
         storeConfig.dataInitializer().init();
         Store store = storeConfig.store();
-        store.open();
+        store.sell();
     }
 }
