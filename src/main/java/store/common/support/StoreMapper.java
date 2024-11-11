@@ -16,15 +16,17 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import store.common.exception.InputPurchaseFormatException;
+import store.payment.domain.PurchaseItemInfo;
 import store.product.domain.Product;
 import store.promotion.domain.Promotion;
-import store.payment.domain.PurchaseItemInfo;
 
 public class StoreMapper {
 
     private static final String DATA_SEPARATOR = ",";
     private static final String NULL_MESSAGE = "null";
     private static final String NAME_QUANTITY_SEPARATOR = "-";
+    private static final String INPUT_PURCHASE_FORMAT = "^\\[(\\p{L}+\\-\\p{L}+)\\](,\\[(\\p{L}+\\-\\p{L}+)\\])*$";
 
     public List<Product> toProducts(List<String> rawProducts) {
         List<Product> products = new ArrayList<>();
@@ -48,6 +50,9 @@ public class StoreMapper {
     }
 
     public List<PurchaseItemInfo> toPurchaseInfo(String rawRequestItems) {
+        if (!rawRequestItems.matches(INPUT_PURCHASE_FORMAT)) {
+            throw new InputPurchaseFormatException();
+        }
         List<String> splitItems = List.of(rawRequestItems.split(DATA_SEPARATOR));
         return splitItems.stream()
                 .map(this::createPurchaseInfo)

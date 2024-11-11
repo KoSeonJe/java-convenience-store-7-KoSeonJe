@@ -1,8 +1,10 @@
 package store.presentation.view.console;
 
 import java.util.List;
+import store.common.exception.CustomException;
 import store.common.support.Answer;
 import store.common.support.StoreMapper;
+import store.common.validate.StoreValidator;
 import store.payment.domain.PurchaseItemInfo;
 import store.payment.domain.Receipt;
 import store.presentation.dto.ProductAllInfo;
@@ -15,11 +17,15 @@ public class ApplicationConsoleView implements ApplicationView {
     private final InputView inputView;
     private final OutputView outputView;
     private final StoreMapper storeMapper;
+    private final StoreValidator storeValidator;
 
-    public ApplicationConsoleView(InputView inputView, OutputView outputView, StoreMapper storeMapper) {
+
+    public ApplicationConsoleView(InputView inputView, OutputView outputView, StoreMapper storeMapper,
+            StoreValidator storeValidator) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.storeMapper = storeMapper;
+        this.storeValidator = storeValidator;
     }
 
     @Override
@@ -30,8 +36,17 @@ public class ApplicationConsoleView implements ApplicationView {
 
     @Override
     public List<PurchaseItemInfo> inputPurchaseItem() {
-        String inputtedItems = inputView.requireInputItem();
-        return storeMapper.toPurchaseInfo(inputtedItems);
+        while (true) {
+            try {
+                String inputtedItems = inputView.requireInputItem();
+                List<PurchaseItemInfo> purchaseItemInfos = storeMapper.toPurchaseInfo(inputtedItems);
+                storeValidator.enoughQuantity(purchaseItemInfos);
+                storeValidator.existProduct(purchaseItemInfos);
+                return purchaseItemInfos;
+            } catch (CustomException e) {
+                outputView.printError(e.getMessage());
+            }
+        }
     }
 
     @Override
