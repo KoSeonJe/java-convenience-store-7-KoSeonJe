@@ -56,7 +56,7 @@ public class ApplicationConsoleView implements ApplicationView {
                 String inputAnswer = inputView.confirmAdditionalItem(name, getCount);
                 Answer.validateFormat(inputAnswer);
                 return inputAnswer;
-            } catch (IllegalArgumentException e) {
+            } catch (CustomException e) {
                 outputView.printError(e.getMessage());
             }
         }
@@ -69,7 +69,7 @@ public class ApplicationConsoleView implements ApplicationView {
                 String inputAnswer = inputView.confirmOriginalPrice(name, quantityDifference);
                 Answer.validateFormat(inputAnswer);
                 return inputAnswer;
-            } catch (IllegalArgumentException e) {
+            } catch (CustomException e) {
                 outputView.printError(e.getMessage());
             }
         }
@@ -82,7 +82,7 @@ public class ApplicationConsoleView implements ApplicationView {
                 String inputAnswer = inputView.confirmApplyMembership();
                 Answer.validateFormat(inputAnswer);
                 return inputAnswer;
-            } catch (IllegalArgumentException e) {
+            } catch (CustomException e) {
                 outputView.printError(e.getMessage());
             }
         }
@@ -100,7 +100,7 @@ public class ApplicationConsoleView implements ApplicationView {
                 String inputAnswer = inputView.askContinue();
                 Answer.validateFormat(inputAnswer);
                 return inputAnswer;
-            } catch (IllegalArgumentException e) {
+            } catch (CustomException e) {
                 outputView.printError(e.getMessage());
             }
         }

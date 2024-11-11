@@ -42,6 +42,6 @@ public class Promotion {
 
     public boolean isActive(LocalDateTime now) {
         LocalDate nowDate = LocalDate.from(now);
-        return !startDate.isBefore(nowDate) && !endDate.isAfter(nowDate);
+        return !nowDate.isBefore(startDate) && !nowDate.isAfter(endDate);
     }
 }
