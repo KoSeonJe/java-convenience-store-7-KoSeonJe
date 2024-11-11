@@ -56,7 +56,7 @@ public final class StoreConfig {
     }
 
     private ApplicationView applicationView() {
-        return new ApplicationConsoleView(inputView(), outputView(), new StoreMapper());
+        return new ApplicationConsoleView(inputView(), outputView(), new StoreMapper(), storeValidator());
     }
 
     private InputView inputView() {
@@ -84,7 +84,7 @@ public final class StoreConfig {
     }
 
     private PurchaseController purchaseController() {
-        return new PurchaseController(productService(), applicationView(), storeValidator(), purchaseInfoService());
+        return new PurchaseController(productService(), purchaseInfoService(), applicationView());
     }
 
     private PaymentController paymentController() {

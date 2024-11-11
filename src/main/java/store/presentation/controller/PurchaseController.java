@@ -12,14 +12,14 @@ import store.product.service.ProductService;
 public class PurchaseController {
 
     private final ProductService productService;
-    private final ApplicationView applicationView;
     private final PurchaseInfoService purchaseInfoService;
+    private final ApplicationView applicationView;
 
-    public PurchaseController(ProductService productService, ApplicationView applicationView,
-            PurchaseInfoService purchaseInfoService) {
+    public PurchaseController(ProductService productService, PurchaseInfoService purchaseInfoService,
+            ApplicationView applicationView) {
         this.productService = productService;
-        this.applicationView = applicationView;
         this.purchaseInfoService = purchaseInfoService;
+        this.applicationView = applicationView;
     }
 
     public List<PurchaseItemInfo> requirePurchaseItem() {

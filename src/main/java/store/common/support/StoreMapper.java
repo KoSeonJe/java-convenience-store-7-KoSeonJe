@@ -26,7 +26,7 @@ public class StoreMapper {
     private static final String DATA_SEPARATOR = ",";
     private static final String NULL_MESSAGE = "null";
     private static final String NAME_QUANTITY_SEPARATOR = "-";
-    private static final String INPUT_PURCHASE_FORMAT = "^\\[(\\p{L}+\\-\\p{L}+)\\](,\\[(\\p{L}+\\-\\p{L}+)\\])*$";
+    private static final String INPUT_PURCHASE_FORMAT = "^(\\[[\\p{L}+-]+-[\\p{L}\\d]+\\])(,\\[[\\p{L}+-]+-[\\p{L}\\d]+\\])*$";
 
     public List<Product> toProducts(List<String> rawProducts) {
         List<Product> products = new ArrayList<>();
