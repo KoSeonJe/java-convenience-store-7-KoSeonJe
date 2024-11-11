@@ -46,7 +46,6 @@ public class StoreMapper {
             promotions.add(promotion);
         });
         return promotions;
-
     }
 
     public List<PurchaseItemInfo> toPurchaseInfo(String rawRequestItems) {

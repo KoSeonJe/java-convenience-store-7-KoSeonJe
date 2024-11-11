@@ -20,4 +20,8 @@ public class StoreFixture {
     public static InMemoryPromotionRepository promotionRepository() {
         return InMemoryPromotionRepository.getInstance();
     }
+
+    public static StoreMapper storeMapper() {
+        return new StoreMapper();
+    }
 }
